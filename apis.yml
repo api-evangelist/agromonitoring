@@ -5,7 +5,7 @@ apis:
   - aid: agromonitoring:agromonitoring
     name: Agromonitoring
     tags:
-      - API
+      - Agriculture
     humanURL: ' https://agromonitoring.com/'
     properties:
       - url: ' https://agromonitoring.com/'
