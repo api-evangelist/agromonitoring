@@ -11,9 +11,9 @@ apis:
       - url: ' https://agromonitoring.com/'
         type: Documentation
     description: >-
-      Based on a large amount of processing satellite and climate data, we
-      provide satellite imagery, vegetation indices and weather data as well as
-      analytical reports and crop monitoring. 
+      Based on a large amount of processing satellite and climate data, we provide
+      satellite imagery, vegetation indices and weather data as well as analytical
+      reports and crop monitoring.
 name: Agromonitoring
 tags:
   - Agriculture
@@ -24,15 +24,11 @@ created: '2025-02-06'
 modified: '2026-03-16'
 position: Consumer
 description: >-
-  Agromonitoring is a technology company that specializes in providing real-time
-  data and analytics for agricultural purposes. By using satellite imagery,
-  weather data, and other sources of information, Agromonitoring is able to
-  monitor crop growth, detect potential issues, and provide recommendations to
-  farmers on how to optimize their yields. This data-driven approach allows
-  farmers to make more informed decisions, leading to improved efficiency and
-  sustainability in their agricultural practices. Agromonitoring's services help
-  to increase crop production, reduce input costs, and ultimately contribute to
-  a more secure and reliable food supply.
+  Agromonitoring is a technology company that specializes in providing real-time data
+  and analytics for agricultural purposes. By using satellite imagery, weather data,
+  and other sources of information, Agromonitoring is able to monitor crop growth,
+  detect potential issues, and provide recommendations to farmers on how to optimize
+  their yields.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
