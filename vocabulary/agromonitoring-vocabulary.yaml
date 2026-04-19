@@ -1,0 +1,151 @@
+name: Agromonitoring Vocabulary
+description: Controlled vocabulary and taxonomy for the Agromonitoring Agro API, covering precision agriculture, remote sensing, vegetation indices, and environmental monitoring terminology.
+version: "1.0"
+provider: Agromonitoring
+
+domains:
+  - name: Field Management
+    description: Concepts related to defining and managing agricultural field polygons
+    terms:
+      - term: polygon
+        definition: A georeferenced field boundary defined using GeoJSON geometry
+        aliases: [field, parcel, AOI, area of interest]
+      - term: polyid
+        definition: Unique identifier assigned to a registered field polygon
+        aliases: [polygon ID, field ID]
+      - term: geo_json
+        definition: GeoJSON-formatted geometry object describing a field boundary
+        type: object
+        format: GeoJSON
+
+  - name: Satellite Imagery
+    description: Terms for satellite image search, acquisition, and processing
+    terms:
+      - term: satellite image
+        definition: A captured scene from a satellite sensor covering a field area
+      - term: cloud_coverage
+        definition: Percentage of the image area obscured by clouds (0–100)
+        unit: percent
+      - term: valid_time_start
+        definition: Start of the satellite acquisition time window
+        type: timestamp
+      - term: valid_time_end
+        definition: End of the satellite acquisition time window
+        type: timestamp
+      - term: resolution
+        definition: Spatial resolution of the satellite image in meters
+        unit: meters
+
+  - name: Vegetation Indices
+    description: Spectral indices derived from satellite imagery to assess crop health
+    terms:
+      - term: NDVI
+        definition: Normalized Difference Vegetation Index — measures green vegetation density; ranges from -1 to 1, healthy vegetation typically 0.2–0.9
+        formula: "(NIR - RED) / (NIR + RED)"
+        range: [-1, 1]
+      - term: EVI
+        definition: Enhanced Vegetation Index — improved NDVI with reduced atmospheric and soil background noise
+        range: [-1, 1]
+      - term: EVI2
+        definition: Two-band Enhanced Vegetation Index — calculated without blue band
+        range: [-1, 1]
+      - term: NRI
+        definition: Normalized Red Index — vegetation stress indicator using red band
+      - term: DSWI
+        definition: Disease-Water Stress Index — detects water stress and disease in crops
+      - term: LSWI
+        definition: Land Surface Water Index — measures water content in vegetation canopy
+
+  - name: Weather
+    description: Meteorological data terms for agricultural decision support
+    terms:
+      - term: temp
+        definition: Current air temperature at 2 meters above ground
+        unit: Kelvin
+      - term: feels_like
+        definition: Perceived temperature accounting for wind and humidity
+        unit: Kelvin
+      - term: humidity
+        definition: Relative humidity of the air
+        unit: percent
+        range: [0, 100]
+      - term: pressure
+        definition: Atmospheric pressure at sea level
+        unit: hPa
+      - term: wind_speed
+        definition: Wind speed at 10 meters above ground
+        unit: m/s
+      - term: wind_deg
+        definition: Wind direction in degrees from North (meteorological)
+        unit: degrees
+        range: [0, 360]
+      - term: clouds
+        definition: Cloud cover percentage
+        unit: percent
+
+  - name: Soil
+    description: Soil condition measurements for irrigation and planting decisions
+    terms:
+      - term: t0
+        definition: Soil temperature at the surface (0 cm depth)
+        unit: Kelvin
+      - term: t10
+        definition: Soil temperature at 10 cm depth
+        unit: Kelvin
+      - term: moisture
+        definition: Volumetric soil moisture content in the top 0–10 cm layer
+        unit: m³/m³
+
+  - name: UV Radiation
+    description: Solar ultraviolet radiation measurement
+    terms:
+      - term: UVI
+        definition: UV Index — dimensionless measure of UV radiation intensity; values above 3 require sun protection
+        range: [0, 16]
+        thresholds:
+          low: [0, 2]
+          moderate: [3, 5]
+          high: [6, 7]
+          very_high: [8, 10]
+          extreme: [11, 16]
+
+operations:
+  - operationId: listPolygons
+    tags: [Field Management]
+    description: Lists all registered field polygons
+
+  - operationId: createPolygon
+    tags: [Field Management]
+    description: Registers a new field polygon
+
+  - operationId: getPolygon
+    tags: [Field Management]
+    description: Retrieves a specific polygon by ID
+
+  - operationId: deletePolygon
+    tags: [Field Management]
+    description: Removes a polygon from the account
+
+  - operationId: searchSatelliteImages
+    tags: [Satellite Imagery]
+    description: Searches for satellite images within a date range
+
+  - operationId: getNdviHistory
+    tags: [Vegetation Indices]
+    description: Returns time-series vegetation index data
+
+  - operationId: getCurrentWeather
+    tags: [Weather]
+    description: Returns current weather for a field
+
+  - operationId: getWeatherForecast
+    tags: [Weather]
+    description: Returns multi-day weather forecast
+
+  - operationId: getSoilData
+    tags: [Soil]
+    description: Returns soil temperature and moisture data
+
+  - operationId: getUvIndex
+    tags: [UV Radiation]
+    description: Returns UV index data for a field

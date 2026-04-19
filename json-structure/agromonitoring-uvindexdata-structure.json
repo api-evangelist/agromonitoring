@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/UvIndexData.json",
+  "title": "UvIndexData",
+  "type": "object",
+  "fields": [
+    {
+      "name": "lat",
+      "type": "float",
+      "description": "Latitude of the location."
+    },
+    {
+      "name": "lon",
+      "type": "float",
+      "description": "Longitude of the location."
+    },
+    {
+      "name": "date_iso",
+      "type": "datetime",
+      "description": "Measurement date in ISO 8601 format."
+    },
+    {
+      "name": "date",
+      "type": "int32",
+      "description": "Measurement date as Unix timestamp."
+    },
+    {
+      "name": "value",
+      "type": "float",
+      "description": "UV index value (scale 0-11+)."
+    }
+  ]
+}

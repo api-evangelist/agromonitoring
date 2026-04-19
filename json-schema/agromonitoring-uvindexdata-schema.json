@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/UvIndexData.json",
+  "title": "UvIndexData",
+  "type": "object",
+  "description": "UV radiation index for a location.",
+  "properties": {
+    "lat": {
+      "type": "number",
+      "format": "double",
+      "description": "Latitude of the location.",
+      "example": 38.5
+    },
+    "lon": {
+      "type": "number",
+      "format": "double",
+      "description": "Longitude of the location.",
+      "example": -94.5
+    },
+    "date_iso": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Measurement date in ISO 8601 format.",
+      "example": "2026-04-19T12:00:00Z"
+    },
+    "date": {
+      "type": "integer",
+      "description": "Measurement date as Unix timestamp.",
+      "example": 1712000000
+    },
+    "value": {
+      "type": "number",
+      "format": "double",
+      "description": "UV index value (scale 0-11+).",
+      "example": 5.2
+    }
+  }
+}

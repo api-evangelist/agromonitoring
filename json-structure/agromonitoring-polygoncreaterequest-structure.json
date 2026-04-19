@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/PolygonCreateRequest.json",
+  "title": "PolygonCreateRequest",
+  "type": "object",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Display name for the field."
+    },
+    {
+      "name": "geo_json",
+      "type": "string"
+    }
+  ]
+}

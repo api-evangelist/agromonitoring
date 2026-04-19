@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/VegetationStats.json",
+  "title": "VegetationStats",
+  "type": "object",
+  "description": "Zonal statistics for a vegetation index over a polygon.",
+  "properties": {
+    "min": {
+      "type": "number",
+      "format": "double",
+      "description": "Minimum index value in the polygon.",
+      "example": 0.1
+    },
+    "max": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum index value in the polygon.",
+      "example": 0.85
+    },
+    "mean": {
+      "type": "number",
+      "format": "double",
+      "description": "Mean index value.",
+      "example": 0.62
+    },
+    "median": {
+      "type": "number",
+      "format": "double",
+      "description": "Median index value.",
+      "example": 0.65
+    },
+    "std": {
+      "type": "number",
+      "format": "double",
+      "description": "Standard deviation of index values.",
+      "example": 0.12
+    }
+  }
+}

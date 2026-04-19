@@ -1,0 +1,188 @@
+name: Agromonitoring API
+description: Shared capability definitions for the Agromonitoring Agro API covering field polygon management, satellite imagery, vegetation indices, weather, soil, and UV data.
+version: "1.0"
+source: https://api.agromonitoring.com/agro/1.0
+operations:
+  - operationId: listPolygons
+    summary: List Polygons
+    method: GET
+    path: /polygons
+    description: Retrieve all field polygons registered in the account
+    parameters:
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: array
+      items: Polygon
+
+  - operationId: createPolygon
+    summary: Create Polygon
+    method: POST
+    path: /polygons
+    description: Register a new field polygon using GeoJSON geometry
+    parameters:
+      - name: appid
+        in: query
+        required: true
+        type: string
+    request:
+      type: PolygonCreateRequest
+    response:
+      type: Polygon
+
+  - operationId: getPolygon
+    summary: Get Polygon
+    method: GET
+    path: /polygons/{polyid}
+    description: Retrieve details for a specific polygon by ID
+    parameters:
+      - name: polyid
+        in: path
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: Polygon
+
+  - operationId: deletePolygon
+    summary: Delete Polygon
+    method: DELETE
+    path: /polygons/{polyid}
+    description: Remove a field polygon from the account
+    parameters:
+      - name: polyid
+        in: path
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: null
+
+  - operationId: searchSatelliteImages
+    summary: Search Satellite Images
+    method: GET
+    path: /image/search
+    description: Search for satellite imagery for a polygon within a date range
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: from
+        in: query
+        required: true
+        type: integer
+      - name: to
+        in: query
+        required: true
+        type: integer
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: array
+      items: SatelliteImage
+
+  - operationId: getNdviHistory
+    summary: Get NDVI History
+    method: GET
+    path: /ndvi/history
+    description: Retrieve NDVI and vegetation index history for a polygon
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: from
+        in: query
+        required: true
+        type: integer
+      - name: to
+        in: query
+        required: true
+        type: integer
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: array
+      items: NdviRecord
+
+  - operationId: getCurrentWeather
+    summary: Get Current Weather
+    method: GET
+    path: /weather
+    description: Retrieve current weather conditions for a polygon
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: WeatherData
+
+  - operationId: getWeatherForecast
+    summary: Get Weather Forecast
+    method: GET
+    path: /weather/forecast
+    description: Retrieve multi-day weather forecast for a polygon
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: array
+      items: WeatherData
+
+  - operationId: getSoilData
+    summary: Get Soil Data
+    method: GET
+    path: /soil
+    description: Retrieve soil temperature and moisture data for a polygon
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: SoilData
+
+  - operationId: getUvIndex
+    summary: Get UV Index
+    method: GET
+    path: /uvi
+    description: Retrieve UV index data for a polygon
+    parameters:
+      - name: polyid
+        in: query
+        required: true
+        type: string
+      - name: appid
+        in: query
+        required: true
+        type: string
+    response:
+      type: UvIndexData

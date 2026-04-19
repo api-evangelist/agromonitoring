@@ -1,0 +1,167 @@
+rules:
+  agromonitoring-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]+$"
+
+  agromonitoring-operation-summary-prefix:
+    description: Operation summaries should start with a verb
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(List|Get|Create|Update|Delete|Search|Post|Put|Patch|Fetch)"
+
+  agromonitoring-operationid-camelcase:
+    description: OperationId must use camelCase
+    severity: error
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  agromonitoring-appid-query-required:
+    description: All operations must require the appid query parameter for authentication
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      function: truthy
+
+  agromonitoring-response-200-defined:
+    description: All operations must define a 200 response
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      field: "200"
+      function: defined
+
+  agromonitoring-response-400-defined:
+    description: All operations should define a 400 error response
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "400"
+      function: defined
+
+  agromonitoring-response-401-defined:
+    description: All operations should define a 401 unauthorized response
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  agromonitoring-schema-ref-components:
+    description: Response schemas should use $ref to components/schemas
+    severity: warn
+    given: "$.paths[*][*].responses[*].content[*].schema"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - required: ["$ref"]
+            - required: ["type"]
+
+  agromonitoring-info-contact:
+    description: API info must include contact details
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: defined
+
+  agromonitoring-info-version:
+    description: API info must include version
+    severity: error
+    given: "$.info"
+    then:
+      field: version
+      function: defined
+
+  agromonitoring-tags-defined:
+    description: All operations must have at least one tag
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: defined
+
+  agromonitoring-property-snake-case:
+    description: Schema properties should use snake_case
+    severity: warn
+    given: "$.components.schemas[*].properties"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  agromonitoring-polygon-id-field:
+    description: Polygon schema must include an id field
+    severity: error
+    given: "$.components.schemas.Polygon.properties"
+    then:
+      field: id
+      function: defined
+
+  agromonitoring-geo-json-coordinates:
+    description: GeoJson schema must include coordinates field
+    severity: error
+    given: "$.components.schemas.GeoJson.properties"
+    then:
+      field: coordinates
+      function: defined
+
+  agromonitoring-ndvi-value-range:
+    description: NDVI values should include minimum/maximum bounds
+    severity: warn
+    given: "$.components.schemas.NdviRecord.properties.ndvi"
+    then:
+      function: truthy
+
+  agromonitoring-weather-temp-field:
+    description: WeatherData schema must include temp field
+    severity: error
+    given: "$.components.schemas.WeatherData.properties"
+    then:
+      field: temp
+      function: defined
+
+  agromonitoring-soil-moisture-field:
+    description: SoilData schema must include moisture field
+    severity: error
+    given: "$.components.schemas.SoilData.properties"
+    then:
+      field: moisture
+      function: defined
+
+  agromonitoring-server-url-defined:
+    description: API must define at least one server URL
+    severity: error
+    given: "$.servers"
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  agromonitoring-security-scheme-apikey:
+    description: API must define an API key security scheme
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: defined
+
+  agromonitoring-path-lowercase:
+    description: Path segments should use lowercase
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9/{}_-]+$"

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/PolygonCreateRequest.json",
+  "title": "PolygonCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new field polygon.",
+  "required": [
+    "name",
+    "geo_json"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the field.",
+      "example": "North Field"
+    },
+    "geo_json": {
+      "$ref": "#/components/schemas/GeoJson"
+    }
+  }
+}

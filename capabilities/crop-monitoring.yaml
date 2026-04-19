@@ -1,0 +1,141 @@
+name: Crop Monitoring
+description: Workflow-oriented capability composition for monitoring crop health, vegetation indices, and environmental conditions using Agromonitoring satellite and sensor data.
+version: "1.0"
+tags:
+  - Agriculture
+  - Crop Monitoring
+  - Satellite Imagery
+  - Remote Sensing
+
+tools:
+  - name: register_field
+    description: Register a new agricultural field polygon using GeoJSON coordinates
+    capability: agromonitoring-api.createPolygon
+    inputs:
+      - name: name
+        type: string
+        description: Human-readable name for the field
+      - name: geo_json
+        type: object
+        description: GeoJSON geometry defining the field boundary
+    outputs:
+      - name: polygon_id
+        type: string
+        description: Unique identifier for the registered polygon
+
+  - name: list_fields
+    description: List all registered field polygons for the account
+    capability: agromonitoring-api.listPolygons
+    outputs:
+      - name: polygons
+        type: array
+        description: Array of registered polygon objects
+
+  - name: get_satellite_imagery
+    description: Search for available satellite imagery for a field within a time window
+    capability: agromonitoring-api.searchSatelliteImages
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+      - name: start_date
+        type: integer
+        description: Start of search period as Unix timestamp
+      - name: end_date
+        type: integer
+        description: End of search period as Unix timestamp
+    outputs:
+      - name: images
+        type: array
+        description: List of available satellite images with cloud coverage and resolution
+
+  - name: get_vegetation_indices
+    description: Retrieve NDVI, EVI, and other vegetation index time series for a field
+    capability: agromonitoring-api.getNdviHistory
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+      - name: start_date
+        type: integer
+        description: Start date as Unix timestamp
+      - name: end_date
+        type: integer
+        description: End date as Unix timestamp
+    outputs:
+      - name: ndvi_history
+        type: array
+        description: Time series of vegetation index measurements (NDVI, EVI, EVI2, NRI, DSWI, LSWI)
+
+  - name: get_current_weather
+    description: Get current weather conditions including temperature, humidity, and wind for a field
+    capability: agromonitoring-api.getCurrentWeather
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+    outputs:
+      - name: weather
+        type: object
+        description: Current weather data including temperature, pressure, humidity, wind, and clouds
+
+  - name: get_weather_forecast
+    description: Get multi-day weather forecast for planning field operations
+    capability: agromonitoring-api.getWeatherForecast
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+    outputs:
+      - name: forecast
+        type: array
+        description: Daily weather forecast records
+
+  - name: get_soil_conditions
+    description: Get soil temperature (surface and 10cm depth) and moisture content for a field
+    capability: agromonitoring-api.getSoilData
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+    outputs:
+      - name: soil_data
+        type: object
+        description: Soil temperature at surface and 10cm depth, plus moisture level
+
+  - name: get_uv_index
+    description: Get UV index data for assessing sun exposure and radiation levels
+    capability: agromonitoring-api.getUvIndex
+    inputs:
+      - name: polygon_id
+        type: string
+        description: Field polygon identifier
+    outputs:
+      - name: uv_data
+        type: object
+        description: UV index value with timestamp
+
+workflows:
+  - name: Field Health Assessment
+    description: Complete crop health assessment combining satellite imagery, vegetation indices, weather, and soil data for a registered field
+    steps:
+      - tool: get_satellite_imagery
+        description: Find recent cloud-free satellite passes
+      - tool: get_vegetation_indices
+        description: Analyze NDVI trends to detect stress or disease
+      - tool: get_soil_conditions
+        description: Check soil moisture and temperature for irrigation decisions
+      - tool: get_current_weather
+        description: Assess current growing conditions
+
+  - name: Field Registration and Baseline
+    description: Register a new field and establish baseline monitoring data
+    steps:
+      - tool: register_field
+        description: Create polygon boundary for the field
+      - tool: get_vegetation_indices
+        description: Establish NDVI baseline
+      - tool: get_soil_conditions
+        description: Record initial soil conditions
+      - tool: get_weather_forecast
+        description: Plan initial management activities

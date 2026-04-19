@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/SoilData.json",
+  "title": "SoilData",
+  "type": "object",
+  "description": "Soil temperature and moisture data for a polygon.",
+  "properties": {
+    "dt": {
+      "type": "integer",
+      "description": "Measurement date as Unix timestamp.",
+      "example": 1712000000
+    },
+    "t0": {
+      "type": "number",
+      "format": "double",
+      "description": "Soil surface temperature in Celsius.",
+      "example": 18.5
+    },
+    "t10": {
+      "type": "number",
+      "format": "double",
+      "description": "Soil temperature at 10cm depth in Celsius.",
+      "example": 15.2
+    },
+    "moisture": {
+      "type": "number",
+      "format": "double",
+      "description": "Volumetric soil moisture (0 to 1 scale).",
+      "example": 0.42
+    }
+  }
+}

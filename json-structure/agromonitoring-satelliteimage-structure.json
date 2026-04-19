@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/SatelliteImage.json",
+  "title": "SatelliteImage",
+  "type": "object",
+  "fields": [
+    {
+      "name": "dt",
+      "type": "int32",
+      "description": "Acquisition date as Unix timestamp."
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "description": "Satellite source (Sentinel-2 or Landsat-8)."
+    },
+    {
+      "name": "cl",
+      "type": "float",
+      "description": "Cloud coverage percentage for this image."
+    },
+    {
+      "name": "stats",
+      "type": "object",
+      "description": "Vegetation index statistics for the polygon."
+    },
+    {
+      "name": "image",
+      "type": "object",
+      "description": "URLs to image tiles (truecolor, falsecolor, ndvi)."
+    }
+  ]
+}

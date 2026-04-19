@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/TemperatureRange.json",
+  "title": "TemperatureRange",
+  "type": "object",
+  "fields": [
+    {
+      "name": "day",
+      "type": "float",
+      "description": "Daytime temperature."
+    },
+    {
+      "name": "min",
+      "type": "float",
+      "description": "Minimum temperature of the day."
+    },
+    {
+      "name": "max",
+      "type": "float",
+      "description": "Maximum temperature of the day."
+    }
+  ]
+}

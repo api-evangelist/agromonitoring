@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/GeoJson.json",
+  "title": "GeoJson",
+  "type": "object",
+  "description": "GeoJSON polygon geometry defining a field boundary.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "GeoJSON geometry type.",
+      "example": "Polygon"
+    },
+    "coordinates": {
+      "type": "array",
+      "description": "Array of coordinate rings defining the polygon.",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

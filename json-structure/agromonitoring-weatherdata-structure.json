@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/WeatherData.json",
+  "title": "WeatherData",
+  "type": "object",
+  "fields": [
+    {
+      "name": "dt",
+      "type": "int32",
+      "description": "Date as Unix timestamp."
+    },
+    {
+      "name": "temp",
+      "type": "string"
+    },
+    {
+      "name": "humidity",
+      "type": "int32",
+      "description": "Relative humidity percentage."
+    },
+    {
+      "name": "wind_speed",
+      "type": "float",
+      "description": "Wind speed in m/s (or mph for imperial)."
+    },
+    {
+      "name": "wind_deg",
+      "type": "int32",
+      "description": "Wind direction in degrees."
+    },
+    {
+      "name": "clouds",
+      "type": "int32",
+      "description": "Cloud coverage percentage."
+    },
+    {
+      "name": "rain",
+      "type": "float",
+      "description": "Precipitation amount in mm."
+    },
+    {
+      "name": "uvi",
+      "type": "float",
+      "description": "UV index value."
+    }
+  ]
+}

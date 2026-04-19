@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/ErrorResponse.json",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "Standard error response.",
+  "properties": {
+    "cod": {
+      "type": "integer",
+      "description": "Error code.",
+      "example": 401
+    },
+    "message": {
+      "type": "string",
+      "description": "Error message.",
+      "example": "Invalid API key."
+    }
+  }
+}

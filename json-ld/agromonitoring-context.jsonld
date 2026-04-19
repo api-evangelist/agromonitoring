@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "agro": "https://api.agromonitoring.com/vocab/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+
+    "Polygon": "agro:Polygon",
+    "SatelliteImage": "agro:SatelliteImage",
+    "NdviRecord": "agro:NdviRecord",
+    "WeatherData": "agro:WeatherData",
+    "SoilData": "agro:SoilData",
+    "UvIndexData": "agro:UvIndexData",
+
+    "id": "@id",
+    "name": "schema:name",
+    "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "geo_json": "geo:hasGeometry",
+    "coordinates": "geo:coordinates",
+
+    "valid_time_start": {"@id": "agro:validTimeStart", "@type": "xsd:dateTime"},
+    "valid_time_end": {"@id": "agro:validTimeEnd", "@type": "xsd:dateTime"},
+    "resolution": "agro:resolution",
+    "coverage": "agro:coverage",
+    "image_time": {"@id": "agro:imageTime", "@type": "xsd:dateTime"},
+    "cloud_coverage": "agro:cloudCoverage",
+
+    "ndvi": "agro:ndvi",
+    "evi": "agro:evi",
+    "evi2": "agro:evi2",
+    "nri": "agro:nri",
+    "dswi": "agro:dswi",
+    "lswi": "agro:lswi",
+    "dt": {"@id": "agro:timestamp", "@type": "xsd:dateTime"},
+
+    "temp": "schema:temperature",
+    "feels_like": "agro:feelsLike",
+    "temp_min": "agro:tempMin",
+    "temp_max": "agro:tempMax",
+    "pressure": "agro:pressure",
+    "humidity": "agro:humidity",
+    "wind_speed": "agro:windSpeed",
+    "wind_deg": "agro:windDirection",
+    "clouds": "agro:cloudCover",
+    "description": "schema:description",
+
+    "t0": "agro:soilTempSurface",
+    "t10": "agro:soilTemp10cm",
+    "moisture": "agro:soilMoisture",
+
+    "uvi": "agro:uvIndex"
+  }
+}

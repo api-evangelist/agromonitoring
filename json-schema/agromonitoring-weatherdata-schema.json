@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/WeatherData.json",
+  "title": "WeatherData",
+  "type": "object",
+  "description": "Weather conditions for a specific date and location.",
+  "properties": {
+    "dt": {
+      "type": "integer",
+      "description": "Date as Unix timestamp.",
+      "example": 1712000000
+    },
+    "temp": {
+      "$ref": "#/components/schemas/TemperatureRange"
+    },
+    "humidity": {
+      "type": "integer",
+      "description": "Relative humidity percentage.",
+      "example": 65
+    },
+    "wind_speed": {
+      "type": "number",
+      "format": "double",
+      "description": "Wind speed in m/s (or mph for imperial).",
+      "example": 4.2
+    },
+    "wind_deg": {
+      "type": "integer",
+      "description": "Wind direction in degrees.",
+      "example": 180
+    },
+    "clouds": {
+      "type": "integer",
+      "description": "Cloud coverage percentage.",
+      "example": 30
+    },
+    "rain": {
+      "type": "number",
+      "format": "double",
+      "description": "Precipitation amount in mm.",
+      "example": 0.0
+    },
+    "uvi": {
+      "type": "number",
+      "format": "double",
+      "description": "UV index value.",
+      "example": 5.2
+    }
+  }
+}

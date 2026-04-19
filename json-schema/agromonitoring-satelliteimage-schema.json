@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/SatelliteImage.json",
+  "title": "SatelliteImage",
+  "type": "object",
+  "description": "Satellite imagery metadata with vegetation index statistics.",
+  "properties": {
+    "dt": {
+      "type": "integer",
+      "description": "Acquisition date as Unix timestamp.",
+      "example": 1709000000
+    },
+    "source": {
+      "type": "string",
+      "description": "Satellite source (Sentinel-2 or Landsat-8).",
+      "enum": [
+        "Sentinel-2",
+        "Landsat-8"
+      ],
+      "example": "Sentinel-2"
+    },
+    "cl": {
+      "type": "number",
+      "format": "double",
+      "description": "Cloud coverage percentage for this image.",
+      "example": 5.2
+    },
+    "stats": {
+      "type": "object",
+      "description": "Vegetation index statistics for the polygon.",
+      "properties": {
+        "ndvi": {
+          "$ref": "#/components/schemas/VegetationStats"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "description": "URLs to image tiles (truecolor, falsecolor, ndvi).",
+      "properties": {
+        "truecolor": {
+          "type": "string",
+          "description": "URL to the true color image tile.",
+          "example": "https://api.agromonitoring.com/agro/1.0/image/1/truecolor"
+        },
+        "falsecolor": {
+          "type": "string",
+          "description": "URL to the false color image tile.",
+          "example": "https://api.agromonitoring.com/agro/1.0/image/1/falsecolor"
+        },
+        "ndvi": {
+          "type": "string",
+          "description": "URL to the NDVI image tile.",
+          "example": "https://api.agromonitoring.com/agro/1.0/image/1/ndvi"
+        }
+      }
+    }
+  }
+}

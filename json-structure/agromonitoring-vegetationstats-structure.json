@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/VegetationStats.json",
+  "title": "VegetationStats",
+  "type": "object",
+  "fields": [
+    {
+      "name": "min",
+      "type": "float",
+      "description": "Minimum index value in the polygon."
+    },
+    {
+      "name": "max",
+      "type": "float",
+      "description": "Maximum index value in the polygon."
+    },
+    {
+      "name": "mean",
+      "type": "float",
+      "description": "Mean index value."
+    },
+    {
+      "name": "median",
+      "type": "float",
+      "description": "Median index value."
+    },
+    {
+      "name": "std",
+      "type": "float",
+      "description": "Standard deviation of index values."
+    }
+  ]
+}

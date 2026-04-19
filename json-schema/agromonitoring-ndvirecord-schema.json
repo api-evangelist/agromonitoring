@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/NdviRecord.json",
+  "title": "NdviRecord",
+  "type": "object",
+  "description": "Historical NDVI data record for a specific acquisition date.",
+  "properties": {
+    "dt": {
+      "type": "integer",
+      "description": "Acquisition date as Unix timestamp.",
+      "example": 1709000000
+    },
+    "source": {
+      "type": "string",
+      "description": "Satellite source.",
+      "example": "Sentinel-2"
+    },
+    "cl": {
+      "type": "number",
+      "format": "double",
+      "description": "Cloud coverage percentage.",
+      "example": 5.2
+    },
+    "stats": {
+      "$ref": "#/components/schemas/VegetationStats"
+    }
+  }
+}

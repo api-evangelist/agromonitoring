@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/SoilData.json",
+  "title": "SoilData",
+  "type": "object",
+  "fields": [
+    {
+      "name": "dt",
+      "type": "int32",
+      "description": "Measurement date as Unix timestamp."
+    },
+    {
+      "name": "t0",
+      "type": "float",
+      "description": "Soil surface temperature in Celsius."
+    },
+    {
+      "name": "t10",
+      "type": "float",
+      "description": "Soil temperature at 10cm depth in Celsius."
+    },
+    {
+      "name": "moisture",
+      "type": "float",
+      "description": "Volumetric soil moisture (0 to 1 scale)."
+    }
+  ]
+}

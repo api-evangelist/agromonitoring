@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.agromonitoring.com/schemas/TemperatureRange.json",
+  "title": "TemperatureRange",
+  "type": "object",
+  "description": "Daily temperature range data.",
+  "properties": {
+    "day": {
+      "type": "number",
+      "format": "double",
+      "description": "Daytime temperature.",
+      "example": 22.5
+    },
+    "min": {
+      "type": "number",
+      "format": "double",
+      "description": "Minimum temperature of the day.",
+      "example": 15.3
+    },
+    "max": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum temperature of the day.",
+      "example": 27.8
+    }
+  }
+}

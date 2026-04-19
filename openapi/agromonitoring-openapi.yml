@@ -1,1 +1,927 @@
-{}
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro API
+  description: >-
+    Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2,
+    DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for
+    precision agriculture. Based on processing satellite data from Landsat 8 and
+    Sentinel-2, the Agro API enables developers to build agricultural monitoring
+    applications with real-time and historical crop, weather, and soil data.
+    Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+  - url: https://api.agromonitoring.com/agro/1.0
+    description: Agromonitoring Agro API v1.0
+tags:
+  - name: Polygons
+    description: Create and manage field polygon definitions
+  - name: Satellite Imagery
+    description: Access satellite imagery and vegetation index data
+  - name: NDVI History
+    description: Historical NDVI vegetation index data
+  - name: Weather
+    description: Current, forecast, and historical weather data
+  - name: Soil
+    description: Soil temperature and moisture data
+  - name: UV Index
+    description: UV radiation index data
+paths:
+  /polygons:
+    get:
+      operationId: listPolygons
+      summary: Agromonitoring List Polygons
+      description: Returns a list of all registered polygon field boundaries for the account.
+      tags:
+        - Polygons
+      parameters:
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: List of registered field polygons.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Polygon'
+              examples:
+                ListPolygons200Example:
+                  summary: Default listPolygons 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: poly-500123
+                      name: North Field
+                      area: 45.2
+                      created_at: '2025-03-15T14:30:00Z'
+                      geo_json:
+                        type: Polygon
+                        coordinates:
+                          - - - -94.5
+                              - 38.5
+                            - - -94.4
+                              - 38.5
+                            - - -94.4
+                              - 38.4
+                            - - -94.5
+                              - 38.4
+                            - - -94.5
+                              - 38.5
+        '401':
+          description: Unauthorized. Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createPolygon
+      summary: Agromonitoring Create Polygon
+      description: Creates a new field polygon boundary for crop monitoring.
+      tags:
+        - Polygons
+      parameters:
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolygonCreateRequest'
+            examples:
+              CreatePolygonRequestExample:
+                summary: Default createPolygon request
+                x-microcks-default: true
+                value:
+                  name: North Field
+                  geo_json:
+                    type: Polygon
+                    coordinates:
+                      - - - -94.5
+                          - 38.5
+                        - - -94.4
+                          - 38.5
+                        - - -94.4
+                          - 38.4
+                        - - -94.5
+                          - 38.4
+                        - - -94.5
+                          - 38.5
+      responses:
+        '201':
+          description: Polygon created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polygon'
+              examples:
+                CreatePolygon201Example:
+                  summary: Default createPolygon 201 response
+                  x-microcks-default: true
+                  value:
+                    id: poly-500124
+                    name: North Field
+                    area: 45.2
+                    created_at: '2026-04-19T10:00:00Z'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /polygons/{polyid}:
+    get:
+      operationId: getPolygon
+      summary: Agromonitoring Get Polygon
+      description: Returns details of a specific field polygon.
+      tags:
+        - Polygons
+      parameters:
+        - name: polyid
+          in: path
+          description: Unique identifier for the polygon.
+          required: true
+          schema:
+            type: string
+            example: poly-500123
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Polygon details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polygon'
+              examples:
+                GetPolygon200Example:
+                  summary: Default getPolygon 200 response
+                  x-microcks-default: true
+                  value:
+                    id: poly-500123
+                    name: North Field
+                    area: 45.2
+                    created_at: '2025-03-15T14:30:00Z'
+        '404':
+          description: Polygon not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deletePolygon
+      summary: Agromonitoring Delete Polygon
+      description: Deletes a field polygon from the account.
+      tags:
+        - Polygons
+      parameters:
+        - name: polyid
+          in: path
+          description: Unique identifier for the polygon.
+          required: true
+          schema:
+            type: string
+            example: poly-500123
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '204':
+          description: Polygon deleted successfully.
+        '404':
+          description: Polygon not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /image/search:
+    get:
+      operationId: searchSatelliteImages
+      summary: Agromonitoring Search Satellite Images
+      description: >-
+        Searches for available satellite imagery for a polygon within a date range.
+        Returns image metadata including cloud coverage and vegetation indices
+        from Landsat 8 and Sentinel-2 satellites.
+      tags:
+        - Satellite Imagery
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier to search imagery for.
+          required: true
+          schema:
+            type: string
+            example: poly-500123
+        - name: start
+          in: query
+          description: Start date for imagery search (Unix timestamp).
+          required: true
+          schema:
+            type: integer
+            example: 1700000000
+        - name: end
+          in: query
+          description: End date for imagery search (Unix timestamp).
+          required: true
+          schema:
+            type: integer
+            example: 1712000000
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: List of available satellite images for the polygon and date range.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SatelliteImage'
+              examples:
+                SearchSatelliteImages200Example:
+                  summary: Default searchSatelliteImages 200 response
+                  x-microcks-default: true
+                  value:
+                    - dt: 1709000000
+                      source: Sentinel-2
+                      cl: 5.2
+                      stats:
+                        ndvi:
+                          min: 0.1
+                          max: 0.85
+                          mean: 0.62
+                          median: 0.65
+                          std: 0.12
+                      image:
+                        truecolor: https://api.agromonitoring.com/agro/1.0/image/1/truecolor
+                        falsecolor: https://api.agromonitoring.com/agro/1.0/image/1/falsecolor
+                        ndvi: https://api.agromonitoring.com/agro/1.0/image/1/ndvi
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ndvi/history:
+    get:
+      operationId: getNdviHistory
+      summary: Agromonitoring Get NDVI History
+      description: >-
+        Returns historical NDVI (Normalized Difference Vegetation Index) data for a
+        polygon over a specified date range. NDVI values range from -1 to 1, where
+        values near 1 indicate dense green vegetation. Data is derived from Landsat 8
+        and Sentinel-2 satellite imagery.
+      tags:
+        - NDVI History
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier.
+          required: true
+          schema:
+            type: string
+            example: poly-500123
+        - name: start
+          in: query
+          description: Start date for NDVI history (Unix timestamp).
+          required: true
+          schema:
+            type: integer
+            example: 1700000000
+        - name: end
+          in: query
+          description: End date for NDVI history (Unix timestamp).
+          required: true
+          schema:
+            type: integer
+            example: 1712000000
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Historical NDVI data for the polygon.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NdviRecord'
+              examples:
+                GetNdviHistory200Example:
+                  summary: Default getNdviHistory 200 response
+                  x-microcks-default: true
+                  value:
+                    - dt: 1709000000
+                      source: Sentinel-2
+                      cl: 5.2
+                      stats:
+                        min: 0.1
+                        max: 0.85
+                        mean: 0.62
+                        median: 0.65
+                        std: 0.12
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /weather:
+    get:
+      operationId: getCurrentWeather
+      summary: Agromonitoring Get Current Weather
+      description: >-
+        Returns current weather conditions for a specific geographic location or
+        polygon, including temperature, humidity, wind speed, cloudiness, and
+        precipitation data.
+      tags:
+        - Weather
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier (use instead of lat/lon for field-specific weather).
+          required: false
+          schema:
+            type: string
+            example: poly-500123
+        - name: lat
+          in: query
+          description: Latitude coordinate.
+          required: false
+          schema:
+            type: number
+            format: double
+            example: 38.5
+        - name: lon
+          in: query
+          description: Longitude coordinate.
+          required: false
+          schema:
+            type: number
+            format: double
+            example: -94.5
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+        - name: units
+          in: query
+          description: Units system (metric, imperial, standard).
+          required: false
+          schema:
+            type: string
+            enum:
+              - metric
+              - imperial
+              - standard
+            example: metric
+      responses:
+        '200':
+          description: Current weather conditions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherData'
+              examples:
+                GetCurrentWeather200Example:
+                  summary: Default getCurrentWeather 200 response
+                  x-microcks-default: true
+                  value:
+                    dt: 1712000000
+                    temp:
+                      day: 22.5
+                      min: 15.3
+                      max: 27.8
+                    humidity: 65
+                    wind_speed: 4.2
+                    wind_deg: 180
+                    clouds: 30
+                    rain: 0.0
+                    uvi: 5.2
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /weather/forecast:
+    get:
+      operationId: getWeatherForecast
+      summary: Agromonitoring Get Weather Forecast
+      description: Returns a 5-day weather forecast for a location or polygon.
+      tags:
+        - Weather
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier.
+          required: false
+          schema:
+            type: string
+            example: poly-500123
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+        - name: units
+          in: query
+          description: Units system (metric, imperial, standard).
+          required: false
+          schema:
+            type: string
+            enum:
+              - metric
+              - imperial
+              - standard
+            example: metric
+      responses:
+        '200':
+          description: 5-day weather forecast data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeatherData'
+              examples:
+                GetWeatherForecast200Example:
+                  summary: Default getWeatherForecast 200 response
+                  x-microcks-default: true
+                  value:
+                    - dt: 1712086400
+                      temp:
+                        day: 24.0
+                        min: 16.0
+                        max: 29.0
+                      humidity: 60
+                      wind_speed: 3.5
+                      clouds: 20
+                      rain: 0.0
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /soil:
+    get:
+      operationId: getSoilData
+      summary: Agromonitoring Get Soil Data
+      description: >-
+        Returns current soil temperature and moisture readings for a polygon.
+        Provides soil conditions at multiple depths for precision agriculture
+        irrigation and fertility management.
+      tags:
+        - Soil
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier.
+          required: true
+          schema:
+            type: string
+            example: poly-500123
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Soil temperature and moisture data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoilData'
+              examples:
+                GetSoilData200Example:
+                  summary: Default getSoilData 200 response
+                  x-microcks-default: true
+                  value:
+                    dt: 1712000000
+                    t0: 18.5
+                    t10: 15.2
+                    moisture: 0.42
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /uvi:
+    get:
+      operationId: getUvIndex
+      summary: Agromonitoring Get UV Index
+      description: Returns the current UV (ultraviolet radiation) index for a location or polygon.
+      tags:
+        - UV Index
+      parameters:
+        - name: polyid
+          in: query
+          description: Polygon identifier.
+          required: false
+          schema:
+            type: string
+            example: poly-500123
+        - name: lat
+          in: query
+          description: Latitude coordinate.
+          required: false
+          schema:
+            type: number
+            format: double
+            example: 38.5
+        - name: lon
+          in: query
+          description: Longitude coordinate.
+          required: false
+          schema:
+            type: number
+            format: double
+            example: -94.5
+        - name: appid
+          in: query
+          description: API key for authentication.
+          required: true
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      responses:
+        '200':
+          description: UV index data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UvIndexData'
+              examples:
+                GetUvIndex200Example:
+                  summary: Default getUvIndex 200 response
+                  x-microcks-default: true
+                  value:
+                    lat: 38.5
+                    lon: -94.5
+                    date_iso: '2026-04-19T12:00:00Z'
+                    date: 1712000000
+                    value: 5.2
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: >-
+        API key obtained by registering at agromonitoring.com. Append
+        appid=YOUR_API_KEY to all API requests.
+  schemas:
+    GeoJson:
+      type: object
+      title: GeoJson
+      description: GeoJSON polygon geometry defining a field boundary.
+      properties:
+        type:
+          type: string
+          description: GeoJSON geometry type.
+          example: Polygon
+        coordinates:
+          type: array
+          description: Array of coordinate rings defining the polygon.
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+    Polygon:
+      type: object
+      title: Polygon
+      description: A registered field polygon for crop monitoring.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the polygon.
+          example: poly-500123
+        name:
+          type: string
+          description: Display name for the polygon/field.
+          example: North Field
+        area:
+          type: number
+          format: double
+          description: Field area in hectares.
+          example: 45.2
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the polygon was created.
+          example: '2025-03-15T14:30:00Z'
+        geo_json:
+          $ref: '#/components/schemas/GeoJson'
+    PolygonCreateRequest:
+      type: object
+      title: Polygon Create Request
+      description: Request body for creating a new field polygon.
+      required:
+        - name
+        - geo_json
+      properties:
+        name:
+          type: string
+          description: Display name for the field.
+          example: North Field
+        geo_json:
+          $ref: '#/components/schemas/GeoJson'
+    VegetationStats:
+      type: object
+      title: Vegetation Stats
+      description: Zonal statistics for a vegetation index over a polygon.
+      properties:
+        min:
+          type: number
+          format: double
+          description: Minimum index value in the polygon.
+          example: 0.1
+        max:
+          type: number
+          format: double
+          description: Maximum index value in the polygon.
+          example: 0.85
+        mean:
+          type: number
+          format: double
+          description: Mean index value.
+          example: 0.62
+        median:
+          type: number
+          format: double
+          description: Median index value.
+          example: 0.65
+        std:
+          type: number
+          format: double
+          description: Standard deviation of index values.
+          example: 0.12
+    SatelliteImage:
+      type: object
+      title: Satellite Image
+      description: Satellite imagery metadata with vegetation index statistics.
+      properties:
+        dt:
+          type: integer
+          description: Acquisition date as Unix timestamp.
+          example: 1709000000
+        source:
+          type: string
+          description: Satellite source (Sentinel-2 or Landsat-8).
+          enum:
+            - Sentinel-2
+            - Landsat-8
+          example: Sentinel-2
+        cl:
+          type: number
+          format: double
+          description: Cloud coverage percentage for this image.
+          example: 5.2
+        stats:
+          type: object
+          description: Vegetation index statistics for the polygon.
+          properties:
+            ndvi:
+              $ref: '#/components/schemas/VegetationStats'
+        image:
+          type: object
+          description: URLs to image tiles (truecolor, falsecolor, ndvi).
+          properties:
+            truecolor:
+              type: string
+              description: URL to the true color image tile.
+              example: https://api.agromonitoring.com/agro/1.0/image/1/truecolor
+            falsecolor:
+              type: string
+              description: URL to the false color image tile.
+              example: https://api.agromonitoring.com/agro/1.0/image/1/falsecolor
+            ndvi:
+              type: string
+              description: URL to the NDVI image tile.
+              example: https://api.agromonitoring.com/agro/1.0/image/1/ndvi
+    NdviRecord:
+      type: object
+      title: NDVI Record
+      description: Historical NDVI data record for a specific acquisition date.
+      properties:
+        dt:
+          type: integer
+          description: Acquisition date as Unix timestamp.
+          example: 1709000000
+        source:
+          type: string
+          description: Satellite source.
+          example: Sentinel-2
+        cl:
+          type: number
+          format: double
+          description: Cloud coverage percentage.
+          example: 5.2
+        stats:
+          $ref: '#/components/schemas/VegetationStats'
+    TemperatureRange:
+      type: object
+      title: Temperature Range
+      description: Daily temperature range data.
+      properties:
+        day:
+          type: number
+          format: double
+          description: Daytime temperature.
+          example: 22.5
+        min:
+          type: number
+          format: double
+          description: Minimum temperature of the day.
+          example: 15.3
+        max:
+          type: number
+          format: double
+          description: Maximum temperature of the day.
+          example: 27.8
+    WeatherData:
+      type: object
+      title: Weather Data
+      description: Weather conditions for a specific date and location.
+      properties:
+        dt:
+          type: integer
+          description: Date as Unix timestamp.
+          example: 1712000000
+        temp:
+          $ref: '#/components/schemas/TemperatureRange'
+        humidity:
+          type: integer
+          description: Relative humidity percentage.
+          example: 65
+        wind_speed:
+          type: number
+          format: double
+          description: Wind speed in m/s (or mph for imperial).
+          example: 4.2
+        wind_deg:
+          type: integer
+          description: Wind direction in degrees.
+          example: 180
+        clouds:
+          type: integer
+          description: Cloud coverage percentage.
+          example: 30
+        rain:
+          type: number
+          format: double
+          description: Precipitation amount in mm.
+          example: 0.0
+        uvi:
+          type: number
+          format: double
+          description: UV index value.
+          example: 5.2
+    SoilData:
+      type: object
+      title: Soil Data
+      description: Soil temperature and moisture data for a polygon.
+      properties:
+        dt:
+          type: integer
+          description: Measurement date as Unix timestamp.
+          example: 1712000000
+        t0:
+          type: number
+          format: double
+          description: Soil surface temperature in Celsius.
+          example: 18.5
+        t10:
+          type: number
+          format: double
+          description: Soil temperature at 10cm depth in Celsius.
+          example: 15.2
+        moisture:
+          type: number
+          format: double
+          description: Volumetric soil moisture (0 to 1 scale).
+          example: 0.42
+    UvIndexData:
+      type: object
+      title: UV Index Data
+      description: UV radiation index for a location.
+      properties:
+        lat:
+          type: number
+          format: double
+          description: Latitude of the location.
+          example: 38.5
+        lon:
+          type: number
+          format: double
+          description: Longitude of the location.
+          example: -94.5
+        date_iso:
+          type: string
+          format: date-time
+          description: Measurement date in ISO 8601 format.
+          example: '2026-04-19T12:00:00Z'
+        date:
+          type: integer
+          description: Measurement date as Unix timestamp.
+          example: 1712000000
+        value:
+          type: number
+          format: double
+          description: UV index value (scale 0-11+).
+          example: 5.2
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+security:
+  - ApiKeyQuery: []

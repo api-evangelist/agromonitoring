@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api.agromonitoring.com/structures/Polygon.json",
+  "title": "Polygon",
+  "type": "object",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique identifier for the polygon."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Display name for the polygon/field."
+    },
+    {
+      "name": "area",
+      "type": "float",
+      "description": "Field area in hectares."
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "description": "Timestamp when the polygon was created."
+    },
+    {
+      "name": "geo_json",
+      "type": "string"
+    }
+  ]
+}
