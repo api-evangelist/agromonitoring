@@ -111,7 +111,7 @@ common:
   - url: https://agromonitoring.com/privacy/
     type: PrivacyPolicy
   - url: json-ld/agromonitoring-context.jsonld
-    type: JSON-LD
+    type: JSONLD
   - url: rules/agromonitoring-spectral-rules.yml
     type: SpectralRules
   - url: vocabulary/agromonitoring-vocabulary.yaml
