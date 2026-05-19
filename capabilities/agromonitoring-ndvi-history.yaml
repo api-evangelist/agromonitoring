@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agromonitoring Agro API — NDVI History
+  description: 'Agromonitoring Agro API — NDVI History. 1 operations. Lead operation: Agromonitoring Get NDVI History. Self-contained
+    Naftiko capability covering one Agromonitoring business surface.'
+  tags:
+  - Agromonitoring
+  - NDVI History
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGROMONITORING_API_KEY: AGROMONITORING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agromonitoring-ndvi-history
+    baseUri: https://api.agromonitoring.com/agro/1.0
+    description: Agromonitoring Agro API — NDVI History business capability. Self-contained, no shared references.
+    resources:
+    - name: ndvi-history
+      path: /ndvi/history
+      operations:
+      - name: getndvihistory
+        method: GET
+        description: Agromonitoring Get NDVI History
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: polyid
+          in: query
+          type: string
+          description: Polygon identifier.
+          required: true
+        - name: start
+          in: query
+          type: integer
+          description: Start date for NDVI history (Unix timestamp).
+          required: true
+        - name: end
+          in: query
+          type: integer
+          description: End date for NDVI history (Unix timestamp).
+          required: true
+        - name: appid
+          in: query
+          type: string
+          description: API key for authentication.
+          required: true
+    authentication:
+      type: apikey
+      key: appid
+      value: '{{env.AGROMONITORING_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: agromonitoring-ndvi-history-rest
+    port: 8080
+    description: REST adapter for Agromonitoring Agro API — NDVI History. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/ndvi/history
+      name: ndvi-history
+      description: REST surface for ndvi-history.
+      operations:
+      - method: GET
+        name: getndvihistory
+        description: Agromonitoring Get NDVI History
+        call: agromonitoring-ndvi-history.getndvihistory
+        with:
+          polyid: rest.polyid
+          start: rest.start
+          end: rest.end
+          appid: rest.appid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agromonitoring-ndvi-history-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agromonitoring Agro API — NDVI History. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: agromonitoring-get-ndvi-history
+      description: Agromonitoring Get NDVI History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agromonitoring-ndvi-history.getndvihistory
+      with:
+        polyid: tools.polyid
+        start: tools.start
+        end: tools.end
+        appid: tools.appid
+      outputParameters:
+      - type: object
+        mapping: $.

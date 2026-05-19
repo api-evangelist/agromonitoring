@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agromonitoring Agro API — Satellite Imagery
+  description: 'Agromonitoring Agro API — Satellite Imagery. 1 operations. Lead operation: Agromonitoring Search Satellite
+    Images. Self-contained Naftiko capability covering one Agromonitoring business surface.'
+  tags:
+  - Agromonitoring
+  - Satellite Imagery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGROMONITORING_API_KEY: AGROMONITORING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agromonitoring-satellite-imagery
+    baseUri: https://api.agromonitoring.com/agro/1.0
+    description: Agromonitoring Agro API — Satellite Imagery business capability. Self-contained, no shared references.
+    resources:
+    - name: image-search
+      path: /image/search
+      operations:
+      - name: searchsatelliteimages
+        method: GET
+        description: Agromonitoring Search Satellite Images
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: polyid
+          in: query
+          type: string
+          description: Polygon identifier to search imagery for.
+          required: true
+        - name: start
+          in: query
+          type: integer
+          description: Start date for imagery search (Unix timestamp).
+          required: true
+        - name: end
+          in: query
+          type: integer
+          description: End date for imagery search (Unix timestamp).
+          required: true
+        - name: appid
+          in: query
+          type: string
+          description: API key for authentication.
+          required: true
+    authentication:
+      type: apikey
+      key: appid
+      value: '{{env.AGROMONITORING_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: agromonitoring-satellite-imagery-rest
+    port: 8080
+    description: REST adapter for Agromonitoring Agro API — Satellite Imagery. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/image/search
+      name: image-search
+      description: REST surface for image-search.
+      operations:
+      - method: GET
+        name: searchsatelliteimages
+        description: Agromonitoring Search Satellite Images
+        call: agromonitoring-satellite-imagery.searchsatelliteimages
+        with:
+          polyid: rest.polyid
+          start: rest.start
+          end: rest.end
+          appid: rest.appid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agromonitoring-satellite-imagery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agromonitoring Agro API — Satellite Imagery. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: agromonitoring-search-satellite-images
+      description: Agromonitoring Search Satellite Images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agromonitoring-satellite-imagery.searchsatelliteimages
+      with:
+        polyid: tools.polyid
+        start: tools.start
+        end: tools.end
+        appid: tools.appid
+      outputParameters:
+      - type: object
+        mapping: $.

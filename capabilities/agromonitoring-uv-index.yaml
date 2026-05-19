@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agromonitoring Agro API — UV Index
+  description: 'Agromonitoring Agro API — UV Index. 1 operations. Lead operation: Agromonitoring Get UV Index. Self-contained
+    Naftiko capability covering one Agromonitoring business surface.'
+  tags:
+  - Agromonitoring
+  - UV Index
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGROMONITORING_API_KEY: AGROMONITORING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agromonitoring-uv-index
+    baseUri: https://api.agromonitoring.com/agro/1.0
+    description: Agromonitoring Agro API — UV Index business capability. Self-contained, no shared references.
+    resources:
+    - name: uvi
+      path: /uvi
+      operations:
+      - name: getuvindex
+        method: GET
+        description: Agromonitoring Get UV Index
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: polyid
+          in: query
+          type: string
+          description: Polygon identifier.
+        - name: lat
+          in: query
+          type: number
+          description: Latitude coordinate.
+        - name: lon
+          in: query
+          type: number
+          description: Longitude coordinate.
+        - name: appid
+          in: query
+          type: string
+          description: API key for authentication.
+          required: true
+    authentication:
+      type: apikey
+      key: appid
+      value: '{{env.AGROMONITORING_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: agromonitoring-uv-index-rest
+    port: 8080
+    description: REST adapter for Agromonitoring Agro API — UV Index. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/uvi
+      name: uvi
+      description: REST surface for uvi.
+      operations:
+      - method: GET
+        name: getuvindex
+        description: Agromonitoring Get UV Index
+        call: agromonitoring-uv-index.getuvindex
+        with:
+          polyid: rest.polyid
+          lat: rest.lat
+          lon: rest.lon
+          appid: rest.appid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agromonitoring-uv-index-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agromonitoring Agro API — UV Index. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: agromonitoring-get-uv-index
+      description: Agromonitoring Get UV Index
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agromonitoring-uv-index.getuvindex
+      with:
+        polyid: tools.polyid
+        lat: tools.lat
+        lon: tools.lon
+        appid: tools.appid
+      outputParameters:
+      - type: object
+        mapping: $.

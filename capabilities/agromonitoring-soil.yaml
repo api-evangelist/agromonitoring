@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agromonitoring Agro API — Soil
+  description: 'Agromonitoring Agro API — Soil. 1 operations. Lead operation: Agromonitoring Get Soil Data. Self-contained
+    Naftiko capability covering one Agromonitoring business surface.'
+  tags:
+  - Agromonitoring
+  - Soil
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGROMONITORING_API_KEY: AGROMONITORING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agromonitoring-soil
+    baseUri: https://api.agromonitoring.com/agro/1.0
+    description: Agromonitoring Agro API — Soil business capability. Self-contained, no shared references.
+    resources:
+    - name: soil
+      path: /soil
+      operations:
+      - name: getsoildata
+        method: GET
+        description: Agromonitoring Get Soil Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: polyid
+          in: query
+          type: string
+          description: Polygon identifier.
+          required: true
+        - name: appid
+          in: query
+          type: string
+          description: API key for authentication.
+          required: true
+    authentication:
+      type: apikey
+      key: appid
+      value: '{{env.AGROMONITORING_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: agromonitoring-soil-rest
+    port: 8080
+    description: REST adapter for Agromonitoring Agro API — Soil. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/soil
+      name: soil
+      description: REST surface for soil.
+      operations:
+      - method: GET
+        name: getsoildata
+        description: Agromonitoring Get Soil Data
+        call: agromonitoring-soil.getsoildata
+        with:
+          polyid: rest.polyid
+          appid: rest.appid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agromonitoring-soil-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agromonitoring Agro API — Soil. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: agromonitoring-get-soil-data
+      description: Agromonitoring Get Soil Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agromonitoring-soil.getsoildata
+      with:
+        polyid: tools.polyid
+        appid: tools.appid
+      outputParameters:
+      - type: object
+        mapping: $.
