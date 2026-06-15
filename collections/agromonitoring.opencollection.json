@@ -1,0 +1,368 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Polygons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring List Polygons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons",
+            "params": [
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns a list of all registered polygon field boundaries for the account."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Create Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons",
+            "params": [
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new field polygon boundary for crop monitoring."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Get Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons/:polyid",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the polygon."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific field polygon."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Delete Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons/:polyid",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the polygon."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Deletes a field polygon from the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Satellite Imagery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Search Satellite Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/image/search",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier to search imagery for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for imagery search (Unix timestamp)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for imagery search (Unix timestamp)."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Searches for available satellite imagery for a polygon within a date range. Returns image metadata including cloud coverage and vegetation indices from Landsat 8 and Sentinel-2 satellites."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NDVI History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get NDVI History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/ndvi/history",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for NDVI history (Unix timestamp)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for NDVI history (Unix timestamp)."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns historical NDVI (Normalized Difference Vegetation Index) data for a polygon over a specified date range. NDVI values range from -1 to 1, where values near 1 indicate dense green vegetation. Data is derived from Landsat 8 and Sentinel-2 satellite imagery."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Weather",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get Current Weather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/weather",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier (use instead of lat/lon for field-specific weather)."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units system (metric, imperial, standard)."
+              }
+            ]
+          },
+          "docs": "Returns current weather conditions for a specific geographic location or polygon, including temperature, humidity, wind speed, cloudiness, and precipitation data."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Get Weather Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/weather/forecast",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units system (metric, imperial, standard)."
+              }
+            ]
+          },
+          "docs": "Returns a 5-day weather forecast for a location or polygon."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Soil",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get Soil Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/soil",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns current soil temperature and moisture readings for a polygon. Provides soil conditions at multiple depths for precision agriculture irrigation and fertility management."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "UV Index",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get UV Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/uvi",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns the current UV (ultraviolet radiation) index for a location or polygon."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
