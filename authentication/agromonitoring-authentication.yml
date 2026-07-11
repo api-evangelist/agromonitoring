@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/agromonitoring-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: appid
+  description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY
+    to all API requests.
+  sources:
+  - openapi/agromonitoring-openapi.yml
