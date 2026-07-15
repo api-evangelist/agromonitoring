@@ -92,6 +92,8 @@ apis:
       weather data, soil conditions, and UV index for registered agricultural field polygons. Enables precision
       agriculture workflows including crop health monitoring, irrigation decision support, and yield optimization.
 common:
+  - type: AgenticAccess
+    url: agentic-access/agromonitoring-agentic-access.yml
   - type: DomainSecurity
     url: security/agromonitoring-domain-security.yml
   - type: Authentication
