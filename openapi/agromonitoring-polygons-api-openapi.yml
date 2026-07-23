@@ -1,0 +1,294 @@
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro NDVI History Polygons API
+  description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agromonitoring.com/agro/1.0
+  description: Agromonitoring Agro API v1.0
+security:
+- ApiKeyQuery: []
+tags:
+- name: Polygons
+  description: Create and manage field polygon definitions
+paths:
+  /polygons:
+    get:
+      operationId: listPolygons
+      summary: Agromonitoring List Polygons
+      description: Returns a list of all registered polygon field boundaries for the account.
+      tags:
+      - Polygons
+      parameters:
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '200':
+          description: List of registered field polygons.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Polygon'
+              examples:
+                ListPolygons200Example:
+                  summary: Default listPolygons 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: poly-500123
+                    name: North Field
+                    area: 45.2
+                    created_at: '2025-03-15T14:30:00Z'
+                    geo_json:
+                      type: Polygon
+                      coordinates:
+                      - - - -94.5
+                          - 38.5
+                        - - -94.4
+                          - 38.5
+                        - - -94.4
+                          - 38.4
+                        - - -94.5
+                          - 38.4
+                        - - -94.5
+                          - 38.5
+        '401':
+          description: Unauthorized. Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createPolygon
+      summary: Agromonitoring Create Polygon
+      description: Creates a new field polygon boundary for crop monitoring.
+      tags:
+      - Polygons
+      parameters:
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolygonCreateRequest'
+            examples:
+              CreatePolygonRequestExample:
+                summary: Default createPolygon request
+                x-microcks-default: true
+                value:
+                  name: North Field
+                  geo_json:
+                    type: Polygon
+                    coordinates:
+                    - - - -94.5
+                        - 38.5
+                      - - -94.4
+                        - 38.5
+                      - - -94.4
+                        - 38.4
+                      - - -94.5
+                        - 38.4
+                      - - -94.5
+                        - 38.5
+      responses:
+        '201':
+          description: Polygon created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polygon'
+              examples:
+                CreatePolygon201Example:
+                  summary: Default createPolygon 201 response
+                  x-microcks-default: true
+                  value:
+                    id: poly-500124
+                    name: North Field
+                    area: 45.2
+                    created_at: '2026-04-19T10:00:00Z'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /polygons/{polyid}:
+    get:
+      operationId: getPolygon
+      summary: Agromonitoring Get Polygon
+      description: Returns details of a specific field polygon.
+      tags:
+      - Polygons
+      parameters:
+      - name: polyid
+        in: path
+        description: Unique identifier for the polygon.
+        required: true
+        schema:
+          type: string
+          example: poly-500123
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Polygon details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polygon'
+              examples:
+                GetPolygon200Example:
+                  summary: Default getPolygon 200 response
+                  x-microcks-default: true
+                  value:
+                    id: poly-500123
+                    name: North Field
+                    area: 45.2
+                    created_at: '2025-03-15T14:30:00Z'
+        '404':
+          description: Polygon not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deletePolygon
+      summary: Agromonitoring Delete Polygon
+      description: Deletes a field polygon from the account.
+      tags:
+      - Polygons
+      parameters:
+      - name: polyid
+        in: path
+        description: Unique identifier for the polygon.
+        required: true
+        schema:
+          type: string
+          example: poly-500123
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '204':
+          description: Polygon deleted successfully.
+        '404':
+          description: Polygon not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Polygon:
+      type: object
+      title: Polygon
+      description: A registered field polygon for crop monitoring.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the polygon.
+          example: poly-500123
+        name:
+          type: string
+          description: Display name for the polygon/field.
+          example: North Field
+        area:
+          type: number
+          format: double
+          description: Field area in hectares.
+          example: 45.2
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the polygon was created.
+          example: '2025-03-15T14:30:00Z'
+        geo_json:
+          $ref: '#/components/schemas/GeoJson'
+    GeoJson:
+      type: object
+      title: GeoJson
+      description: GeoJSON polygon geometry defining a field boundary.
+      properties:
+        type:
+          type: string
+          description: GeoJSON geometry type.
+          example: Polygon
+        coordinates:
+          type: array
+          description: Array of coordinate rings defining the polygon.
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+    PolygonCreateRequest:
+      type: object
+      title: Polygon Create Request
+      description: Request body for creating a new field polygon.
+      required:
+      - name
+      - geo_json
+      properties:
+        name:
+          type: string
+          description: Display name for the field.
+          example: North Field
+        geo_json:
+          $ref: '#/components/schemas/GeoJson'
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY to all API requests.

@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro NDVI History API
+  description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agromonitoring.com/agro/1.0
+  description: Agromonitoring Agro API v1.0
+security:
+- ApiKeyQuery: []
+tags:
+- name: NDVI History
+  description: Historical NDVI vegetation index data
+paths:
+  /ndvi/history:
+    get:
+      operationId: getNdviHistory
+      summary: Agromonitoring Get NDVI History
+      description: Returns historical NDVI (Normalized Difference Vegetation Index) data for a polygon over a specified date range. NDVI values range from -1 to 1, where values near 1 indicate dense green vegetation. Data is derived from Landsat 8 and Sentinel-2 satellite imagery.
+      tags:
+      - NDVI History
+      parameters:
+      - name: polyid
+        in: query
+        description: Polygon identifier.
+        required: true
+        schema:
+          type: string
+          example: poly-500123
+      - name: start
+        in: query
+        description: Start date for NDVI history (Unix timestamp).
+        required: true
+        schema:
+          type: integer
+          example: 1700000000
+      - name: end
+        in: query
+        description: End date for NDVI history (Unix timestamp).
+        required: true
+        schema:
+          type: integer
+          example: 1712000000
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Historical NDVI data for the polygon.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NdviRecord'
+              examples:
+                GetNdviHistory200Example:
+                  summary: Default getNdviHistory 200 response
+                  x-microcks-default: true
+                  value:
+                  - dt: 1709000000
+                    source: Sentinel-2
+                    cl: 5.2
+                    stats:
+                      min: 0.1
+                      max: 0.85
+                      mean: 0.62
+                      median: 0.65
+                      std: 0.12
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VegetationStats:
+      type: object
+      title: Vegetation Stats
+      description: Zonal statistics for a vegetation index over a polygon.
+      properties:
+        min:
+          type: number
+          format: double
+          description: Minimum index value in the polygon.
+          example: 0.1
+        max:
+          type: number
+          format: double
+          description: Maximum index value in the polygon.
+          example: 0.85
+        mean:
+          type: number
+          format: double
+          description: Mean index value.
+          example: 0.62
+        median:
+          type: number
+          format: double
+          description: Median index value.
+          example: 0.65
+        std:
+          type: number
+          format: double
+          description: Standard deviation of index values.
+          example: 0.12
+    NdviRecord:
+      type: object
+      title: NDVI Record
+      description: Historical NDVI data record for a specific acquisition date.
+      properties:
+        dt:
+          type: integer
+          description: Acquisition date as Unix timestamp.
+          example: 1709000000
+        source:
+          type: string
+          description: Satellite source.
+          example: Sentinel-2
+        cl:
+          type: number
+          format: double
+          description: Cloud coverage percentage.
+          example: 5.2
+        stats:
+          $ref: '#/components/schemas/VegetationStats'
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY to all API requests.

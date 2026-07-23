@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro NDVI History UV Index API
+  description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agromonitoring.com/agro/1.0
+  description: Agromonitoring Agro API v1.0
+security:
+- ApiKeyQuery: []
+tags:
+- name: UV Index
+  description: UV radiation index data
+paths:
+  /uvi:
+    get:
+      operationId: getUvIndex
+      summary: Agromonitoring Get UV Index
+      description: Returns the current UV (ultraviolet radiation) index for a location or polygon.
+      tags:
+      - UV Index
+      parameters:
+      - name: polyid
+        in: query
+        description: Polygon identifier.
+        required: false
+        schema:
+          type: string
+          example: poly-500123
+      - name: lat
+        in: query
+        description: Latitude coordinate.
+        required: false
+        schema:
+          type: number
+          format: double
+          example: 38.5
+      - name: lon
+        in: query
+        description: Longitude coordinate.
+        required: false
+        schema:
+          type: number
+          format: double
+          example: -94.5
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '200':
+          description: UV index data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UvIndexData'
+              examples:
+                GetUvIndex200Example:
+                  summary: Default getUvIndex 200 response
+                  x-microcks-default: true
+                  value:
+                    lat: 38.5
+                    lon: -94.5
+                    date_iso: '2026-04-19T12:00:00Z'
+                    date: 1712000000
+                    value: 5.2
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UvIndexData:
+      type: object
+      title: UV Index Data
+      description: UV radiation index for a location.
+      properties:
+        lat:
+          type: number
+          format: double
+          description: Latitude of the location.
+          example: 38.5
+        lon:
+          type: number
+          format: double
+          description: Longitude of the location.
+          example: -94.5
+        date_iso:
+          type: string
+          format: date-time
+          description: Measurement date in ISO 8601 format.
+          example: '2026-04-19T12:00:00Z'
+        date:
+          type: integer
+          description: Measurement date as Unix timestamp.
+          example: 1712000000
+        value:
+          type: number
+          format: double
+          description: UV index value (scale 0-11+).
+          example: 5.2
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY to all API requests.

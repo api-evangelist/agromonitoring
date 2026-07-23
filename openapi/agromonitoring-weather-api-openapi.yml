@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro NDVI History Weather API
+  description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agromonitoring.com/agro/1.0
+  description: Agromonitoring Agro API v1.0
+security:
+- ApiKeyQuery: []
+tags:
+- name: Weather
+  description: Current, forecast, and historical weather data
+paths:
+  /weather:
+    get:
+      operationId: getCurrentWeather
+      summary: Agromonitoring Get Current Weather
+      description: Returns current weather conditions for a specific geographic location or polygon, including temperature, humidity, wind speed, cloudiness, and precipitation data.
+      tags:
+      - Weather
+      parameters:
+      - name: polyid
+        in: query
+        description: Polygon identifier (use instead of lat/lon for field-specific weather).
+        required: false
+        schema:
+          type: string
+          example: poly-500123
+      - name: lat
+        in: query
+        description: Latitude coordinate.
+        required: false
+        schema:
+          type: number
+          format: double
+          example: 38.5
+      - name: lon
+        in: query
+        description: Longitude coordinate.
+        required: false
+        schema:
+          type: number
+          format: double
+          example: -94.5
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - name: units
+        in: query
+        description: Units system (metric, imperial, standard).
+        required: false
+        schema:
+          type: string
+          enum:
+          - metric
+          - imperial
+          - standard
+          example: metric
+      responses:
+        '200':
+          description: Current weather conditions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherData'
+              examples:
+                GetCurrentWeather200Example:
+                  summary: Default getCurrentWeather 200 response
+                  x-microcks-default: true
+                  value:
+                    dt: 1712000000
+                    temp:
+                      day: 22.5
+                      min: 15.3
+                      max: 27.8
+                    humidity: 65
+                    wind_speed: 4.2
+                    wind_deg: 180
+                    clouds: 30
+                    rain: 0.0
+                    uvi: 5.2
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /weather/forecast:
+    get:
+      operationId: getWeatherForecast
+      summary: Agromonitoring Get Weather Forecast
+      description: Returns a 5-day weather forecast for a location or polygon.
+      tags:
+      - Weather
+      parameters:
+      - name: polyid
+        in: query
+        description: Polygon identifier.
+        required: false
+        schema:
+          type: string
+          example: poly-500123
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - name: units
+        in: query
+        description: Units system (metric, imperial, standard).
+        required: false
+        schema:
+          type: string
+          enum:
+          - metric
+          - imperial
+          - standard
+          example: metric
+      responses:
+        '200':
+          description: 5-day weather forecast data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeatherData'
+              examples:
+                GetWeatherForecast200Example:
+                  summary: Default getWeatherForecast 200 response
+                  x-microcks-default: true
+                  value:
+                  - dt: 1712086400
+                    temp:
+                      day: 24.0
+                      min: 16.0
+                      max: 29.0
+                    humidity: 60
+                    wind_speed: 3.5
+                    clouds: 20
+                    rain: 0.0
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WeatherData:
+      type: object
+      title: Weather Data
+      description: Weather conditions for a specific date and location.
+      properties:
+        dt:
+          type: integer
+          description: Date as Unix timestamp.
+          example: 1712000000
+        temp:
+          $ref: '#/components/schemas/TemperatureRange'
+        humidity:
+          type: integer
+          description: Relative humidity percentage.
+          example: 65
+        wind_speed:
+          type: number
+          format: double
+          description: Wind speed in m/s (or mph for imperial).
+          example: 4.2
+        wind_deg:
+          type: integer
+          description: Wind direction in degrees.
+          example: 180
+        clouds:
+          type: integer
+          description: Cloud coverage percentage.
+          example: 30
+        rain:
+          type: number
+          format: double
+          description: Precipitation amount in mm.
+          example: 0.0
+        uvi:
+          type: number
+          format: double
+          description: UV index value.
+          example: 5.2
+    TemperatureRange:
+      type: object
+      title: Temperature Range
+      description: Daily temperature range data.
+      properties:
+        day:
+          type: number
+          format: double
+          description: Daytime temperature.
+          example: 22.5
+        min:
+          type: number
+          format: double
+          description: Minimum temperature of the day.
+          example: 15.3
+        max:
+          type: number
+          format: double
+          description: Maximum temperature of the day.
+          example: 27.8
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY to all API requests.

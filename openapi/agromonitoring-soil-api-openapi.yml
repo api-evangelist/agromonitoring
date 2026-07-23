@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Agromonitoring Agro NDVI History Soil API
+  description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
+  version: '1.0'
+  contact:
+    url: https://agromonitoring.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agromonitoring.com/agro/1.0
+  description: Agromonitoring Agro API v1.0
+security:
+- ApiKeyQuery: []
+tags:
+- name: Soil
+  description: Soil temperature and moisture data
+paths:
+  /soil:
+    get:
+      operationId: getSoilData
+      summary: Agromonitoring Get Soil Data
+      description: Returns current soil temperature and moisture readings for a polygon. Provides soil conditions at multiple depths for precision agriculture irrigation and fertility management.
+      tags:
+      - Soil
+      parameters:
+      - name: polyid
+        in: query
+        description: Polygon identifier.
+        required: true
+        schema:
+          type: string
+          example: poly-500123
+      - name: appid
+        in: query
+        description: API key for authentication.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      responses:
+        '200':
+          description: Soil temperature and moisture data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoilData'
+              examples:
+                GetSoilData200Example:
+                  summary: Default getSoilData 200 response
+                  x-microcks-default: true
+                  value:
+                    dt: 1712000000
+                    t0: 18.5
+                    t10: 15.2
+                    moisture: 0.42
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SoilData:
+      type: object
+      title: Soil Data
+      description: Soil temperature and moisture data for a polygon.
+      properties:
+        dt:
+          type: integer
+          description: Measurement date as Unix timestamp.
+          example: 1712000000
+        t0:
+          type: number
+          format: double
+          description: Soil surface temperature in Celsius.
+          example: 18.5
+        t10:
+          type: number
+          format: double
+          description: Soil temperature at 10cm depth in Celsius.
+          example: 15.2
+        moisture:
+          type: number
+          format: double
+          description: Volumetric soil moisture (0 to 1 scale).
+          example: 0.42
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: appid
+      description: API key obtained by registering at agromonitoring.com. Append appid=YOUR_API_KEY to all API requests.
