@@ -1,0 +1,636 @@
+{
+  "info": {
+    "_postman_id": "a47b87b3-67dd-4940-ac2f-eecf06f375ea",
+    "name": "Agromonitoring Agro NDVI History Polygons API",
+    "description": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:12.000Z",
+    "updatedAt": "2026-07-28T00:29:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a47b87b3-67dd-4940-ac2f-eecf06f375ea"
+  },
+  "item": [
+    {
+      "name": "polygons",
+      "item": [
+        {
+          "name": "{polyid}",
+          "item": [
+            {
+              "name": "Agromonitoring Get Polygon",
+              "id": "7e84540f-bcd4-4bad-b6c4-4fb72a349d03",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/polygons/:polyid?appid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons",
+                    ":polyid"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "1573f620-4a8a-46a2-a88f-e787ebd03322",
+                      "key": "polyid",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the polygon."
+                    }
+                  ]
+                },
+                "description": "Returns details of a specific field polygon."
+              },
+              "response": [
+                {
+                  "id": "84ad1350-6a9b-4115-a9a1-5d13f24cfa88",
+                  "name": "Polygon details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/polygons/:polyid?appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "polygons",
+                        ":polyid"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "polyid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"area\": \"<double>\",\n  \"created_at\": \"<dateTime>\",\n  \"geo_json\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:29:13.000Z",
+                  "updatedAt": "2026-07-28T00:29:13.000Z",
+                  "uid": "35240-84ad1350-6a9b-4115-a9a1-5d13f24cfa88"
+                },
+                {
+                  "id": "df282299-3b70-403e-8852-1f9192fa089f",
+                  "name": "Polygon not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/polygons/:polyid?appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "polygons",
+                        ":polyid"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "polyid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:29:13.000Z",
+                  "updatedAt": "2026-07-28T00:29:13.000Z",
+                  "uid": "35240-df282299-3b70-403e-8852-1f9192fa089f"
+                }
+              ],
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-7e84540f-bcd4-4bad-b6c4-4fb72a349d03"
+            },
+            {
+              "name": "Agromonitoring Delete Polygon",
+              "id": "a390f4fa-643a-4825-9dd6-e3f608c3039d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/polygons/:polyid?appid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons",
+                    ":polyid"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "716d2cdc-6f4c-460e-8566-81b52eb980b7",
+                      "key": "polyid",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the polygon."
+                    }
+                  ]
+                },
+                "description": "Deletes a field polygon from the account."
+              },
+              "response": [
+                {
+                  "id": "f33feb1f-7fa0-4151-a819-373b4768c7bb",
+                  "name": "Polygon deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/polygons/:polyid?appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "polygons",
+                        ":polyid"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "polyid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:29:13.000Z",
+                  "updatedAt": "2026-07-28T00:29:13.000Z",
+                  "uid": "35240-f33feb1f-7fa0-4151-a819-373b4768c7bb"
+                },
+                {
+                  "id": "60c0c866-2748-42e2-9fa8-37f43cb03d03",
+                  "name": "Polygon not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/polygons/:polyid?appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "polygons",
+                        ":polyid"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "polyid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:29:13.000Z",
+                  "updatedAt": "2026-07-28T00:29:13.000Z",
+                  "uid": "35240-60c0c866-2748-42e2-9fa8-37f43cb03d03"
+                }
+              ],
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-a390f4fa-643a-4825-9dd6-e3f608c3039d"
+            }
+          ],
+          "id": "fbe3b655-85e7-4fcb-b4f8-bbfe84ecf218",
+          "createdAt": "2026-07-28T00:29:13.000Z",
+          "updatedAt": "2026-07-28T00:29:13.000Z",
+          "uid": "35240-fbe3b655-85e7-4fcb-b4f8-bbfe84ecf218"
+        },
+        {
+          "name": "Agromonitoring List Polygons",
+          "id": "7a7104c2-9e82-47c1-9d87-d98485225e64",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polygons?appid=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "polygons"
+              ],
+              "query": [
+                {
+                  "description": "(Required) API key for authentication.",
+                  "key": "appid",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of all registered polygon field boundaries for the account."
+          },
+          "response": [
+            {
+              "id": "3fc27e94-3187-434f-8abb-f83c92fd0673",
+              "name": "List of registered field polygons.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/polygons?appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"area\": \"<double>\",\n    \"created_at\": \"<dateTime>\",\n    \"geo_json\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        [\n          [\n            \"<number>\",\n            \"<number>\"\n          ],\n          [\n            \"<number>\",\n            \"<number>\"\n          ]\n        ],\n        [\n          [\n            \"<number>\",\n            \"<number>\"\n          ],\n          [\n            \"<number>\",\n            \"<number>\"\n          ]\n        ]\n      ]\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"area\": \"<double>\",\n    \"created_at\": \"<dateTime>\",\n    \"geo_json\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        [\n          [\n            \"<number>\",\n            \"<number>\"\n          ],\n          [\n            \"<number>\",\n            \"<number>\"\n          ]\n        ],\n        [\n          [\n            \"<number>\",\n            \"<number>\"\n          ],\n          [\n            \"<number>\",\n            \"<number>\"\n          ]\n        ]\n      ]\n    }\n  }\n]",
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-3fc27e94-3187-434f-8abb-f83c92fd0673"
+            },
+            {
+              "id": "af7fa0e5-bdf6-48dd-b3a3-dbdb3dd4be2d",
+              "name": "Unauthorized. Invalid API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/polygons?appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-af7fa0e5-bdf6-48dd-b3a3-dbdb3dd4be2d"
+            }
+          ],
+          "createdAt": "2026-07-28T00:29:13.000Z",
+          "updatedAt": "2026-07-28T00:29:13.000Z",
+          "uid": "35240-7a7104c2-9e82-47c1-9d87-d98485225e64"
+        },
+        {
+          "name": "Agromonitoring Create Polygon",
+          "id": "67375b6a-5dac-478e-be18-c083660e6136",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"geo_json\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polygons?appid=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "polygons"
+              ],
+              "query": [
+                {
+                  "description": "(Required) API key for authentication.",
+                  "key": "appid",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a new field polygon boundary for crop monitoring."
+          },
+          "response": [
+            {
+              "id": "44ca6b4f-7c7c-4635-9b53-e6f156c47c08",
+              "name": "Polygon created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"geo_json\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/polygons?appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"area\": \"<double>\",\n  \"created_at\": \"<dateTime>\",\n  \"geo_json\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-44ca6b4f-7c7c-4635-9b53-e6f156c47c08"
+            },
+            {
+              "id": "c905e678-42a0-4b52-820f-830b863063ae",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"geo_json\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/polygons?appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polygons"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:29:13.000Z",
+              "updatedAt": "2026-07-28T00:29:13.000Z",
+              "uid": "35240-c905e678-42a0-4b52-820f-830b863063ae"
+            }
+          ],
+          "createdAt": "2026-07-28T00:29:13.000Z",
+          "updatedAt": "2026-07-28T00:29:13.000Z",
+          "uid": "35240-67375b6a-5dac-478e-be18-c083660e6136"
+        }
+      ],
+      "id": "4cf5db4d-a52c-4a70-9142-33f4d52ad4d2",
+      "createdAt": "2026-07-28T00:29:13.000Z",
+      "updatedAt": "2026-07-28T00:29:13.000Z",
+      "uid": "35240-4cf5db4d-a52c-4a70-9142-33f4d52ad4d2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agromonitoring.com/agro/1.0"
+    }
+  ]
+}

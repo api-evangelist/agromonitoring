@@ -1,0 +1,232 @@
+{
+  "info": {
+    "_postman_id": "84e1d947-3150-4368-b792-154a8f2f3dbb",
+    "name": "Agromonitoring Agro NDVI History Satellite Imagery API",
+    "description": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:13.000Z",
+    "updatedAt": "2026-07-28T00:29:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-84e1d947-3150-4368-b792-154a8f2f3dbb"
+  },
+  "item": [
+    {
+      "name": "image",
+      "item": [
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Agromonitoring Search Satellite Images",
+              "id": "0c641e58-ad92-4a17-88e8-57477671e1e8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/image/search?polyid=<string>&start=<integer>&end=<integer>&appid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "image",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Polygon identifier to search imagery for.",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Start date for imagery search (Unix timestamp).",
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) End date for imagery search (Unix timestamp).",
+                      "key": "end",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Searches for available satellite imagery for a polygon within a date range. Returns image metadata including cloud coverage and vegetation indices from Landsat 8 and Sentinel-2 satellites."
+              },
+              "response": [
+                {
+                  "id": "547c7602-0048-4315-97c9-ce978d786b76",
+                  "name": "List of available satellite images for the polygon and date range.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/image/search?polyid=<string>&start=<integer>&end=<integer>&appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "image",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Polygon identifier to search imagery for.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Start date for imagery search (Unix timestamp).",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) End date for imagery search (Unix timestamp).",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"dt\": \"<integer>\",\n    \"source\": \"Landsat-8\",\n    \"cl\": \"<double>\",\n    \"stats\": {\n      \"ndvi\": {\n        \"min\": \"<double>\",\n        \"max\": \"<double>\",\n        \"mean\": \"<double>\",\n        \"median\": \"<double>\",\n        \"std\": \"<double>\"\n      }\n    },\n    \"image\": {\n      \"truecolor\": \"<string>\",\n      \"falsecolor\": \"<string>\",\n      \"ndvi\": \"<string>\"\n    }\n  },\n  {\n    \"dt\": \"<integer>\",\n    \"source\": \"Sentinel-2\",\n    \"cl\": \"<double>\",\n    \"stats\": {\n      \"ndvi\": {\n        \"min\": \"<double>\",\n        \"max\": \"<double>\",\n        \"mean\": \"<double>\",\n        \"median\": \"<double>\",\n        \"std\": \"<double>\"\n      }\n    },\n    \"image\": {\n      \"truecolor\": \"<string>\",\n      \"falsecolor\": \"<string>\",\n      \"ndvi\": \"<string>\"\n    }\n  }\n]",
+                  "createdAt": "2026-07-28T00:29:14.000Z",
+                  "updatedAt": "2026-07-28T00:29:14.000Z",
+                  "uid": "35240-547c7602-0048-4315-97c9-ce978d786b76"
+                },
+                {
+                  "id": "94912025-2f25-4dbc-93ed-dfdabdbf203e",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/image/search?polyid=<string>&start=<integer>&end=<integer>&appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "image",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Polygon identifier to search imagery for.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Start date for imagery search (Unix timestamp).",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) End date for imagery search (Unix timestamp).",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:29:14.000Z",
+                  "updatedAt": "2026-07-28T00:29:14.000Z",
+                  "uid": "35240-94912025-2f25-4dbc-93ed-dfdabdbf203e"
+                }
+              ],
+              "createdAt": "2026-07-28T00:29:14.000Z",
+              "updatedAt": "2026-07-28T00:29:14.000Z",
+              "uid": "35240-0c641e58-ad92-4a17-88e8-57477671e1e8"
+            }
+          ],
+          "id": "6abf8763-34cc-46d4-9334-9485514dfc68",
+          "createdAt": "2026-07-28T00:29:14.000Z",
+          "updatedAt": "2026-07-28T00:29:14.000Z",
+          "uid": "35240-6abf8763-34cc-46d4-9334-9485514dfc68"
+        }
+      ],
+      "id": "c1ea086a-00cf-4018-a898-65daf08c6496",
+      "createdAt": "2026-07-28T00:29:14.000Z",
+      "updatedAt": "2026-07-28T00:29:14.000Z",
+      "uid": "35240-c1ea086a-00cf-4018-a898-65daf08c6496"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agromonitoring.com/agro/1.0"
+    }
+  ]
+}

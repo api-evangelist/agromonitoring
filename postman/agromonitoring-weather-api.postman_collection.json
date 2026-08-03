@@ -1,0 +1,403 @@
+{
+  "info": {
+    "_postman_id": "57093312-a463-42d9-84cd-10c2074a2df1",
+    "name": "Agromonitoring Agro NDVI History Weather API",
+    "description": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:16.000Z",
+    "updatedAt": "2026-07-28T00:29:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-57093312-a463-42d9-84cd-10c2074a2df1"
+  },
+  "item": [
+    {
+      "name": "weather",
+      "item": [
+        {
+          "name": "forecast",
+          "item": [
+            {
+              "name": "Agromonitoring Get Weather Forecast",
+              "id": "1cc0fc70-93c6-4a21-9bf4-c854fe46d1a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weather/forecast?polyid=<string>&appid=<string>&units=metric",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weather",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "description": "Polygon identifier.",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Units system (metric, imperial, standard).",
+                      "key": "units",
+                      "value": "metric"
+                    }
+                  ]
+                },
+                "description": "Returns a 5-day weather forecast for a location or polygon."
+              },
+              "response": [
+                {
+                  "id": "d310fc07-c201-4909-b9af-9a25d5795d25",
+                  "name": "5-day weather forecast data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/weather/forecast?polyid=<string>&appid=<API Key>&units=metric",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "weather",
+                        "forecast"
+                      ],
+                      "query": [
+                        {
+                          "description": "Polygon identifier.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "Units system (metric, imperial, standard).",
+                          "key": "units",
+                          "value": "metric"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"dt\": \"<integer>\",\n    \"temp\": {\n      \"day\": \"<double>\",\n      \"min\": \"<double>\",\n      \"max\": \"<double>\"\n    },\n    \"humidity\": \"<integer>\",\n    \"wind_speed\": \"<double>\",\n    \"wind_deg\": \"<integer>\",\n    \"clouds\": \"<integer>\",\n    \"rain\": \"<double>\",\n    \"uvi\": \"<double>\"\n  },\n  {\n    \"dt\": \"<integer>\",\n    \"temp\": {\n      \"day\": \"<double>\",\n      \"min\": \"<double>\",\n      \"max\": \"<double>\"\n    },\n    \"humidity\": \"<integer>\",\n    \"wind_speed\": \"<double>\",\n    \"wind_deg\": \"<integer>\",\n    \"clouds\": \"<integer>\",\n    \"rain\": \"<double>\",\n    \"uvi\": \"<double>\"\n  }\n]",
+                  "createdAt": "2026-07-28T00:29:16.000Z",
+                  "updatedAt": "2026-07-28T00:29:16.000Z",
+                  "uid": "35240-d310fc07-c201-4909-b9af-9a25d5795d25"
+                },
+                {
+                  "id": "69d027a5-b076-4e2f-905b-9bac9929ed3b",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/weather/forecast?polyid=<string>&appid=<API Key>&units=metric",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "weather",
+                        "forecast"
+                      ],
+                      "query": [
+                        {
+                          "description": "Polygon identifier.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "Units system (metric, imperial, standard).",
+                          "key": "units",
+                          "value": "metric"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:29:16.000Z",
+                  "updatedAt": "2026-07-28T00:29:16.000Z",
+                  "uid": "35240-69d027a5-b076-4e2f-905b-9bac9929ed3b"
+                }
+              ],
+              "createdAt": "2026-07-28T00:29:16.000Z",
+              "updatedAt": "2026-07-28T00:29:16.000Z",
+              "uid": "35240-1cc0fc70-93c6-4a21-9bf4-c854fe46d1a4"
+            }
+          ],
+          "id": "776abd47-bcc6-4b72-a83e-5eb8c39dffb4",
+          "createdAt": "2026-07-28T00:29:16.000Z",
+          "updatedAt": "2026-07-28T00:29:16.000Z",
+          "uid": "35240-776abd47-bcc6-4b72-a83e-5eb8c39dffb4"
+        },
+        {
+          "name": "Agromonitoring Get Current Weather",
+          "id": "145856ae-823e-440d-8db1-d2a08c310f93",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/weather?polyid=<string>&lat=<double>&lon=<double>&appid=<string>&units=metric",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "weather"
+              ],
+              "query": [
+                {
+                  "description": "Polygon identifier (use instead of lat/lon for field-specific weather).",
+                  "key": "polyid",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Latitude coordinate.",
+                  "key": "lat",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Longitude coordinate.",
+                  "key": "lon",
+                  "value": "<double>"
+                },
+                {
+                  "description": "(Required) API key for authentication.",
+                  "key": "appid",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Units system (metric, imperial, standard).",
+                  "key": "units",
+                  "value": "metric"
+                }
+              ]
+            },
+            "description": "Returns current weather conditions for a specific geographic location or polygon, including temperature, humidity, wind speed, cloudiness, and precipitation data."
+          },
+          "response": [
+            {
+              "id": "745bc467-2c74-43dd-beab-4c40e2a11aff",
+              "name": "Current weather conditions.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weather?polyid=<string>&lat=<double>&lon=<double>&appid=<API Key>&units=metric",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weather"
+                  ],
+                  "query": [
+                    {
+                      "description": "Polygon identifier (use instead of lat/lon for field-specific weather).",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude coordinate.",
+                      "key": "lat",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude coordinate.",
+                      "key": "lon",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Units system (metric, imperial, standard).",
+                      "key": "units",
+                      "value": "metric"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"dt\": \"<integer>\",\n  \"temp\": {\n    \"day\": \"<double>\",\n    \"min\": \"<double>\",\n    \"max\": \"<double>\"\n  },\n  \"humidity\": \"<integer>\",\n  \"wind_speed\": \"<double>\",\n  \"wind_deg\": \"<integer>\",\n  \"clouds\": \"<integer>\",\n  \"rain\": \"<double>\",\n  \"uvi\": \"<double>\"\n}",
+              "createdAt": "2026-07-28T00:29:16.000Z",
+              "updatedAt": "2026-07-28T00:29:16.000Z",
+              "uid": "35240-745bc467-2c74-43dd-beab-4c40e2a11aff"
+            },
+            {
+              "id": "80eb0b85-dae9-488a-affc-a384c4b729dc",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weather?polyid=<string>&lat=<double>&lon=<double>&appid=<API Key>&units=metric",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weather"
+                  ],
+                  "query": [
+                    {
+                      "description": "Polygon identifier (use instead of lat/lon for field-specific weather).",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude coordinate.",
+                      "key": "lat",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude coordinate.",
+                      "key": "lon",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Units system (metric, imperial, standard).",
+                      "key": "units",
+                      "value": "metric"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:29:16.000Z",
+              "updatedAt": "2026-07-28T00:29:16.000Z",
+              "uid": "35240-80eb0b85-dae9-488a-affc-a384c4b729dc"
+            }
+          ],
+          "createdAt": "2026-07-28T00:29:16.000Z",
+          "updatedAt": "2026-07-28T00:29:16.000Z",
+          "uid": "35240-145856ae-823e-440d-8db1-d2a08c310f93"
+        }
+      ],
+      "id": "c4fab2a8-1006-466f-b7de-ec1df4f838d5",
+      "createdAt": "2026-07-28T00:29:16.000Z",
+      "updatedAt": "2026-07-28T00:29:16.000Z",
+      "uid": "35240-c4fab2a8-1006-466f-b7de-ec1df4f838d5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agromonitoring.com/agro/1.0"
+    }
+  ]
+}

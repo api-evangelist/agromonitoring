@@ -1,0 +1,232 @@
+{
+  "info": {
+    "_postman_id": "4fab0bc3-2e6a-4eb8-a888-0bc1d19a312b",
+    "name": "Agromonitoring Agro NDVI History API",
+    "description": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:10.000Z",
+    "updatedAt": "2026-07-28T00:29:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4fab0bc3-2e6a-4eb8-a888-0bc1d19a312b"
+  },
+  "item": [
+    {
+      "name": "ndvi",
+      "item": [
+        {
+          "name": "history",
+          "item": [
+            {
+              "name": "Agromonitoring Get NDVI History",
+              "id": "f9bda095-90c8-4d2a-8414-f1e3502f8516",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ndvi/history?polyid=<string>&start=<integer>&end=<integer>&appid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ndvi",
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Polygon identifier.",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Start date for NDVI history (Unix timestamp).",
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) End date for NDVI history (Unix timestamp).",
+                      "key": "end",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns historical NDVI (Normalized Difference Vegetation Index) data for a polygon over a specified date range. NDVI values range from -1 to 1, where values near 1 indicate dense green vegetation. Data is derived from Landsat 8 and Sentinel-2 satellite imagery."
+              },
+              "response": [
+                {
+                  "id": "80eaa739-fe27-48bc-bd63-7eba44c18ea6",
+                  "name": "Historical NDVI data for the polygon.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ndvi/history?polyid=<string>&start=<integer>&end=<integer>&appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ndvi",
+                        "history"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Polygon identifier.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Start date for NDVI history (Unix timestamp).",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) End date for NDVI history (Unix timestamp).",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"dt\": \"<integer>\",\n    \"source\": \"<string>\",\n    \"cl\": \"<double>\",\n    \"stats\": {\n      \"min\": \"<double>\",\n      \"max\": \"<double>\",\n      \"mean\": \"<double>\",\n      \"median\": \"<double>\",\n      \"std\": \"<double>\"\n    }\n  },\n  {\n    \"dt\": \"<integer>\",\n    \"source\": \"<string>\",\n    \"cl\": \"<double>\",\n    \"stats\": {\n      \"min\": \"<double>\",\n      \"max\": \"<double>\",\n      \"mean\": \"<double>\",\n      \"median\": \"<double>\",\n      \"std\": \"<double>\"\n    }\n  }\n]",
+                  "createdAt": "2026-07-28T00:29:11.000Z",
+                  "updatedAt": "2026-07-28T00:29:11.000Z",
+                  "uid": "35240-80eaa739-fe27-48bc-bd63-7eba44c18ea6"
+                },
+                {
+                  "id": "0c53a14f-f53e-4ef8-9bcb-ba0dcd2827e6",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ndvi/history?polyid=<string>&start=<integer>&end=<integer>&appid=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ndvi",
+                        "history"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Polygon identifier.",
+                          "key": "polyid",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Start date for NDVI history (Unix timestamp).",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) End date for NDVI history (Unix timestamp).",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) API key for authentication.",
+                          "key": "appid",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:29:11.000Z",
+                  "updatedAt": "2026-07-28T00:29:11.000Z",
+                  "uid": "35240-0c53a14f-f53e-4ef8-9bcb-ba0dcd2827e6"
+                }
+              ],
+              "createdAt": "2026-07-28T00:29:11.000Z",
+              "updatedAt": "2026-07-28T00:29:11.000Z",
+              "uid": "35240-f9bda095-90c8-4d2a-8414-f1e3502f8516"
+            }
+          ],
+          "id": "73ca7cb1-7bbb-4d1f-891d-809c67fb852e",
+          "createdAt": "2026-07-28T00:29:11.000Z",
+          "updatedAt": "2026-07-28T00:29:11.000Z",
+          "uid": "35240-73ca7cb1-7bbb-4d1f-891d-809c67fb852e"
+        }
+      ],
+      "id": "e46a8706-5a81-49ad-88c6-3be57972b33d",
+      "createdAt": "2026-07-28T00:29:11.000Z",
+      "updatedAt": "2026-07-28T00:29:11.000Z",
+      "uid": "35240-e46a8706-5a81-49ad-88c6-3be57972b33d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agromonitoring.com/agro/1.0"
+    }
+  ]
+}

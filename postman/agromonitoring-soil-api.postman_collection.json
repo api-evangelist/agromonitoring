@@ -1,0 +1,190 @@
+{
+  "info": {
+    "_postman_id": "d24aeca7-bdcc-48b2-80c0-b3cca361ebbd",
+    "name": "Agromonitoring Agro NDVI History Soil API",
+    "description": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:29:14.000Z",
+    "updatedAt": "2026-07-28T00:29:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d24aeca7-bdcc-48b2-80c0-b3cca361ebbd"
+  },
+  "item": [
+    {
+      "name": "soil",
+      "item": [
+        {
+          "name": "Agromonitoring Get Soil Data",
+          "id": "768d2c55-d8ab-4496-b10e-fb12b7a36ed8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/soil?polyid=<string>&appid=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "soil"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Polygon identifier.",
+                  "key": "polyid",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) API key for authentication.",
+                  "key": "appid",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns current soil temperature and moisture readings for a polygon. Provides soil conditions at multiple depths for precision agriculture irrigation and fertility management."
+          },
+          "response": [
+            {
+              "id": "b69e9a54-fac6-4efe-a430-726c0569476e",
+              "name": "Soil temperature and moisture data.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/soil?polyid=<string>&appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "soil"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Polygon identifier.",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"dt\": \"<integer>\",\n  \"t0\": \"<double>\",\n  \"t10\": \"<double>\",\n  \"moisture\": \"<double>\"\n}",
+              "createdAt": "2026-07-28T00:29:14.000Z",
+              "updatedAt": "2026-07-28T00:29:14.000Z",
+              "uid": "35240-b69e9a54-fac6-4efe-a430-726c0569476e"
+            },
+            {
+              "id": "056260e1-755c-4a32-beac-3809319aa6e7",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/soil?polyid=<string>&appid=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "soil"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Polygon identifier.",
+                      "key": "polyid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) API key for authentication.",
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"cod\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:29:14.000Z",
+              "updatedAt": "2026-07-28T00:29:14.000Z",
+              "uid": "35240-056260e1-755c-4a32-beac-3809319aa6e7"
+            }
+          ],
+          "createdAt": "2026-07-28T00:29:14.000Z",
+          "updatedAt": "2026-07-28T00:29:14.000Z",
+          "uid": "35240-768d2c55-d8ab-4496-b10e-fb12b7a36ed8"
+        }
+      ],
+      "id": "92e2450a-71f0-4c03-9b7f-d513dd291282",
+      "createdAt": "2026-07-28T00:29:14.000Z",
+      "updatedAt": "2026-07-28T00:29:14.000Z",
+      "uid": "35240-92e2450a-71f0-4c03-9b7f-d513dd291282"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agromonitoring.com/agro/1.0"
+    }
+  ]
+}

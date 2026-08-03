@@ -1,0 +1,24 @@
+{
+  "provider": "agromonitoring",
+  "sources": [
+    "agromonitoring-ndvi-history-api-openapi.yml",
+    "agromonitoring-polygons-api-openapi.yml",
+    "agromonitoring-satellite-imagery-api-openapi.yml",
+    "agromonitoring-soil-api-openapi.yml",
+    "agromonitoring-uv-index-api-openapi.yml",
+    "agromonitoring-weather-api-openapi.yml"
+  ],
+  "outputs": [
+    "agromonitoring-ndvi-history-api-openapi.yml",
+    "agromonitoring-polygons-api-openapi.yml",
+    "agromonitoring-satellite-imagery-api-openapi.yml",
+    "agromonitoring-soil-api-openapi.yml",
+    "agromonitoring-uv-index-api-openapi.yml",
+    "agromonitoring-weather-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
