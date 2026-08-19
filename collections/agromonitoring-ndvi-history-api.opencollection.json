@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NDVI History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get NDVI History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/ndvi/history",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for NDVI history (Unix timestamp)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for NDVI history (Unix timestamp)."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns historical NDVI (Normalized Difference Vegetation Index) data for a polygon over a specified date range. NDVI values range from -1 to 1, where values near 1 indicate dense green vegetation. Data is derived from Landsat 8 and Sentinel-2 satellite imagery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

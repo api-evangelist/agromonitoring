@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History Polygons API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Polygons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring List Polygons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons",
+            "params": [
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns a list of all registered polygon field boundaries for the account."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Create Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons",
+            "params": [
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new field polygon boundary for crop monitoring."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Get Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons/:polyid",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the polygon."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific field polygon."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Delete Polygon",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.agromonitoring.com/agro/1.0/polygons/:polyid",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the polygon."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Deletes a field polygon from the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

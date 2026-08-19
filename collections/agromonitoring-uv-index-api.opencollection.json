@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History UV Index API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UV Index",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get UV Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/uvi",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns the current UV (ultraviolet radiation) index for a location or polygon."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

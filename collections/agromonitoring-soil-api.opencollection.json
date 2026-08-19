@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History Soil API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Soil",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get Soil Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/soil",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Returns current soil temperature and moisture readings for a polygon. Provides soil conditions at multiple depths for precision agriculture irrigation and fertility management."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

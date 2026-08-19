@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History Weather API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weather",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Get Current Weather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/weather",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier (use instead of lat/lon for field-specific weather)."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units system (metric, imperial, standard)."
+              }
+            ]
+          },
+          "docs": "Returns current weather conditions for a specific geographic location or polygon, including temperature, humidity, wind speed, cloudiness, and precipitation data."
+        },
+        {
+          "info": {
+            "name": "Agromonitoring Get Weather Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/weather/forecast",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              },
+              {
+                "name": "units",
+                "value": "",
+                "type": "query",
+                "description": "Units system (metric, imperial, standard)."
+              }
+            ]
+          },
+          "docs": "Returns a 5-day weather forecast for a location or polygon."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

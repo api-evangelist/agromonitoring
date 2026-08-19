@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agromonitoring Agro NDVI History Satellite Imagery API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appid",
+      "value": "{{appid}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Satellite Imagery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agromonitoring Search Satellite Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agromonitoring.com/agro/1.0/image/search",
+            "params": [
+              {
+                "name": "polyid",
+                "value": "",
+                "type": "query",
+                "description": "Polygon identifier to search imagery for."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for imagery search (Unix timestamp)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date for imagery search (Unix timestamp)."
+              },
+              {
+                "name": "appid",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication."
+              }
+            ]
+          },
+          "docs": "Searches for available satellite imagery for a polygon within a date range. Returns image metadata including cloud coverage and vegetation indices from Landsat 8 and Sentinel-2 satellites."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "f416e495-0140-4837-a4dc-81c39ac00241",
+      "name": "Satellite Imagery",
+      "description": {
+        "content": "Access satellite imagery and vegetation index data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d63a2154-c796-4147-a5c5-e343eb795200",
+          "name": "Agromonitoring Search Satellite Images",
+          "request": {
+            "name": "Agromonitoring Search Satellite Images",
+            "description": {
+              "content": "Searches for available satellite imagery for a polygon within a date range. Returns image metadata including cloud coverage and vegetation indices from Landsat 8 and Sentinel-2 satellites.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "image",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "polyid",
+                  "value": "<string>",
+                  "description": "(Required) Polygon identifier to search imagery for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "(Required) Start date for imagery search (Unix timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<integer>",
+                  "description": "(Required) End date for imagery search (Unix timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) API key for authentication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd2af921-a1cc-47ce-9b9c-3e64da062289",
+              "name": "List of available satellite images for the polygon and date range.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1700000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1712000000"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dt\": 1709000000,\n    \"source\": \"Sentinel-2\",\n    \"cl\": 5.2,\n    \"stats\": {\n      \"ndvi\": {\n        \"min\": 0.1,\n        \"max\": 0.85,\n        \"mean\": 0.62,\n        \"median\": 0.65,\n        \"std\": 0.12\n      }\n    },\n    \"image\": {\n      \"truecolor\": \"https://api.agromonitoring.com/agro/1.0/image/1/truecolor\",\n      \"falsecolor\": \"https://api.agromonitoring.com/agro/1.0/image/1/falsecolor\",\n      \"ndvi\": \"https://api.agromonitoring.com/agro/1.0/image/1/ndvi\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30c4bf8f-38cc-49a6-a6c0-ef58fd705b84",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1700000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1712000000"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cod\": 401,\n  \"message\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agromonitoring.com/agro/1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e8acdb56-c871-40ec-aa99-f7c6e0992ac2",
+    "name": "Agromonitoring Agro NDVI History Satellite Imagery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+      "type": "text/plain"
+    }
+  }
+}

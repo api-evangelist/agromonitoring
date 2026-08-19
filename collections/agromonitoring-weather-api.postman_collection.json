@@ -1,0 +1,396 @@
+{
+  "item": [
+    {
+      "id": "94ffb8c3-28e4-4933-8799-3f01a5238e38",
+      "name": "Weather",
+      "description": {
+        "content": "Current, forecast, and historical weather data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "22aae6da-6dd5-4af8-ae35-982f18be8666",
+          "name": "Agromonitoring Get Current Weather",
+          "request": {
+            "name": "Agromonitoring Get Current Weather",
+            "description": {
+              "content": "Returns current weather conditions for a specific geographic location or polygon, including temperature, humidity, wind speed, cloudiness, and precipitation data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weather"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "polyid",
+                  "value": "<string>",
+                  "description": "Polygon identifier (use instead of lat/lon for field-specific weather)."
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "Latitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "Longitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) API key for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Units system (metric, imperial, standard)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f0b31b1-1a1d-4680-b4f4-8c040a6ddc18",
+              "name": "Current weather conditions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "38.5"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-94.5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "units",
+                      "value": "metric"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dt\": 1712000000,\n  \"temp\": {\n    \"day\": 22.5,\n    \"min\": 15.3,\n    \"max\": 27.8\n  },\n  \"humidity\": 65,\n  \"wind_speed\": 4.2,\n  \"wind_deg\": 180,\n  \"clouds\": 30,\n  \"rain\": 0,\n  \"uvi\": 5.2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48f30360-80ea-4dfe-ad27-518e31a7a725",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "38.5"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-94.5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "units",
+                      "value": "metric"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cod\": 401,\n  \"message\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98f5fefc-2588-4c23-8bfa-3a076dc32558",
+          "name": "Agromonitoring Get Weather Forecast",
+          "request": {
+            "name": "Agromonitoring Get Weather Forecast",
+            "description": {
+              "content": "Returns a 5-day weather forecast for a location or polygon.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weather",
+                "forecast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "polyid",
+                  "value": "<string>",
+                  "description": "Polygon identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) API key for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Units system (metric, imperial, standard)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "598aa70e-8501-4c28-b47c-6905f6f6d15d",
+              "name": "5-day weather forecast data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "units",
+                      "value": "metric"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dt\": 1712086400,\n    \"temp\": {\n      \"day\": 24,\n      \"min\": 16,\n      \"max\": 29\n    },\n    \"humidity\": 60,\n    \"wind_speed\": 3.5,\n    \"clouds\": 20,\n    \"rain\": 0\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "954e79d9-e564-4b9a-aadc-c7cc8f3b4240",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weather",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "units",
+                      "value": "metric"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cod\": 401,\n  \"message\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agromonitoring.com/agro/1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "da99bb0a-a5a2-45ed-b27d-9b0ad96c2ec7",
+    "name": "Agromonitoring Agro NDVI History Weather API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+      "type": "text/plain"
+    }
+  }
+}

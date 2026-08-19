@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "83269e29-1fa1-4b65-b71e-51c65b0d2859",
+      "name": "NDVI History",
+      "description": {
+        "content": "Historical NDVI vegetation index data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e8c4875-9085-4606-bd87-e98f3e0811b6",
+          "name": "Agromonitoring Get NDVI History",
+          "request": {
+            "name": "Agromonitoring Get NDVI History",
+            "description": {
+              "content": "Returns historical NDVI (Normalized Difference Vegetation Index) data for a polygon over a specified date range. NDVI values range from -1 to 1, where values near 1 indicate dense green vegetation. Data is derived from Landsat 8 and Sentinel-2 satellite imagery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ndvi",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "polyid",
+                  "value": "<string>",
+                  "description": "(Required) Polygon identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<integer>",
+                  "description": "(Required) Start date for NDVI history (Unix timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<integer>",
+                  "description": "(Required) End date for NDVI history (Unix timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) API key for authentication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55cb36f4-14c8-4c6d-be9e-21245ce1a75d",
+              "name": "Historical NDVI data for the polygon.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ndvi",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1700000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1712000000"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dt\": 1709000000,\n    \"source\": \"Sentinel-2\",\n    \"cl\": 5.2,\n    \"stats\": {\n      \"min\": 0.1,\n      \"max\": 0.85,\n      \"mean\": 0.62,\n      \"median\": 0.65,\n      \"std\": 0.12\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c00e1cd-91e2-400e-9b35-a8ca289eee26",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ndvi",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1700000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1712000000"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cod\": 401,\n  \"message\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agromonitoring.com/agro/1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5246436-1737-4635-bea6-e9700aa9ab57",
+    "name": "Agromonitoring Agro NDVI History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+      "type": "text/plain"
+    }
+  }
+}

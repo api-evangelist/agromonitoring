@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "6281eaae-7c4a-4d59-a6a9-e6bd3d0e802c",
+      "name": "UV Index",
+      "description": {
+        "content": "UV radiation index data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82a725ff-0940-483c-802f-bc99e0d7c113",
+          "name": "Agromonitoring Get UV Index",
+          "request": {
+            "name": "Agromonitoring Get UV Index",
+            "description": {
+              "content": "Returns the current UV (ultraviolet radiation) index for a location or polygon.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "uvi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "polyid",
+                  "value": "<string>",
+                  "description": "Polygon identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "Latitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "Longitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) API key for authentication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96e6387c-5e52-4f40-b9f9-22e42283aa54",
+              "name": "UV index data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "uvi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "38.5"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-94.5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lat\": 38.5,\n  \"lon\": -94.5,\n  \"date_iso\": \"2026-04-19T12:00:00Z\",\n  \"date\": 1712000000,\n  \"value\": 5.2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "873114e3-5ba7-4b8e-b3ce-87dce5370400",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "uvi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "polyid",
+                      "value": "poly-500123"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "38.5"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-94.5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "YOUR_API_KEY"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cod\": 401,\n  \"message\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agromonitoring.com/agro/1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "562bb559-79c4-4623-8217-0bb748e9cd00",
+    "name": "Agromonitoring Agro NDVI History UV Index API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.",
+      "type": "text/plain"
+    }
+  }
+}
