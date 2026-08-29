@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Agromonitoring Agro NDVI History Weather API
   description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
@@ -163,6 +163,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+    TemperatureRange:
+      type: object
+      title: Temperature Range
+      description: Daily temperature range data.
+      properties:
+        day:
+          type: number
+          format: double
+          description: Daytime temperature.
+          example: 22.5
+        min:
+          type: number
+          format: double
+          description: Minimum temperature of the day.
+          example: 15.3
+        max:
+          type: number
+          format: double
+          description: Maximum temperature of the day.
+          example: 27.8
     WeatherData:
       type: object
       title: Weather Data
@@ -201,39 +234,6 @@ components:
           format: double
           description: UV index value.
           example: 5.2
-    TemperatureRange:
-      type: object
-      title: Temperature Range
-      description: Daily temperature range data.
-      properties:
-        day:
-          type: number
-          format: double
-          description: Daytime temperature.
-          example: 22.5
-        min:
-          type: number
-          format: double
-          description: Minimum temperature of the day.
-          example: 15.3
-        max:
-          type: number
-          format: double
-          description: Maximum temperature of the day.
-          example: 27.8
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

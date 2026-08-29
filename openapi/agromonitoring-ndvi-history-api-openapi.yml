@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Agromonitoring Agro NDVI History API
   description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
@@ -85,6 +85,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
+    NdviRecord:
+      type: object
+      title: NDVI Record
+      description: Historical NDVI data record for a specific acquisition date.
+      properties:
+        dt:
+          type: integer
+          description: Acquisition date as Unix timestamp.
+          example: 1709000000
+        source:
+          type: string
+          description: Satellite source.
+          example: Sentinel-2
+        cl:
+          type: number
+          format: double
+          description: Cloud coverage percentage.
+          example: 5.2
+        stats:
+          $ref: '#/components/schemas/VegetationStats'
     VegetationStats:
       type: object
       title: Vegetation Stats
@@ -115,39 +148,6 @@ components:
           format: double
           description: Standard deviation of index values.
           example: 0.12
-    NdviRecord:
-      type: object
-      title: NDVI Record
-      description: Historical NDVI data record for a specific acquisition date.
-      properties:
-        dt:
-          type: integer
-          description: Acquisition date as Unix timestamp.
-          example: 1709000000
-        source:
-          type: string
-          description: Satellite source.
-          example: Sentinel-2
-        cl:
-          type: number
-          format: double
-          description: Cloud coverage percentage.
-          example: 5.2
-        stats:
-          $ref: '#/components/schemas/VegetationStats'
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
