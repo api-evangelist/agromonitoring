@@ -600,17 +600,18 @@ accessModel:
   try_now: true
   public: false
   label: Freemium · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agromonitoring.png
 access: 3rd-Party
 created: '2025-02-06'
 modified: '2026-05-19'
-position: Consumer
+position: Consuming
 description: >-
   Agromonitoring is a technology company specializing in satellite-based agricultural monitoring. Using Sentinel-2 and
   Landsat imagery combined with weather and soil data, Agromonitoring provides vegetation index time series (NDVI, EVI,
