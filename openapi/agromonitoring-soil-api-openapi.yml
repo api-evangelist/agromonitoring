@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Agromonitoring Agro NDVI History Soil API
+  title: Agromonitoring Agro Soil API
   description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
   version: '1.0'
   contact:

@@ -1,12 +1,7 @@
 {
   "provider": "agromonitoring",
   "sources": [
-    "agromonitoring-ndvi-history-api-openapi.yml",
-    "agromonitoring-polygons-api-openapi.yml",
-    "agromonitoring-satellite-imagery-api-openapi.yml",
-    "agromonitoring-soil-api-openapi.yml",
-    "agromonitoring-uv-index-api-openapi.yml",
-    "agromonitoring-weather-api-openapi.yml"
+    "_ae-authored/agromonitoring-openapi.yml"
   ],
   "outputs": [
     "agromonitoring-ndvi-history-api-openapi.yml",
@@ -20,7 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "agromonitoring-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "agromonitoring-ndvi-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agromonitoring-polygons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agromonitoring-satellite-imagery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agromonitoring-soil-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agromonitoring-uv-index-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agromonitoring-weather-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -85,19 +85,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     NdviRecord:
       type: object
       title: NDVI Record
@@ -118,6 +105,19 @@ components:
           example: 5.2
         stats:
           $ref: '#/components/schemas/VegetationStats'
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
     VegetationStats:
       type: object
       title: Vegetation Stats

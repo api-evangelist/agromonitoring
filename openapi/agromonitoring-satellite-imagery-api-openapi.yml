@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Agromonitoring Agro NDVI History Satellite Imagery API
+  title: Agromonitoring Agro Satellite Imagery API
   description: Agromonitoring provides satellite imagery, vegetation indices (NDVI, EVI, EVI2, DSWI, NDWI, NRI), weather data, soil analysis, and crop monitoring APIs for precision agriculture. Based on processing satellite data from Landsat 8 and Sentinel-2, the Agro API enables developers to build agricultural monitoring applications with real-time and historical crop, weather, and soil data. Authentication is via API key appended to all requests.
   version: '1.0'
   contact:
@@ -90,19 +90,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     SatelliteImage:
       type: object
       title: Satellite Image
@@ -146,6 +133,19 @@ components:
               type: string
               description: URL to the NDVI image tile.
               example: https://api.agromonitoring.com/agro/1.0/image/1/ndvi
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
     VegetationStats:
       type: object
       title: Vegetation Stats
