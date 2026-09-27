@@ -183,19 +183,6 @@ components:
           format: double
           description: Maximum temperature of the day.
           example: 27.8
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     WeatherData:
       type: object
       title: Weather Data
@@ -234,6 +221,19 @@ components:
           format: double
           description: UV index value.
           example: 5.2
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
