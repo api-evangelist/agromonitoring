@@ -90,6 +90,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
     SatelliteImage:
       type: object
       title: Satellite Image
@@ -133,19 +146,6 @@ components:
               type: string
               description: URL to the NDVI image tile.
               example: https://api.agromonitoring.com/agro/1.0/image/1/ndvi
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     VegetationStats:
       type: object
       title: Vegetation Stats
