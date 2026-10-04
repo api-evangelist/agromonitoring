@@ -216,19 +216,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     GeoJson:
       type: object
       title: GeoJson
@@ -286,6 +273,19 @@ components:
           example: '2025-03-15T14:30:00Z'
         geo_json:
           $ref: '#/components/schemas/GeoJson'
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

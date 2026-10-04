@@ -81,19 +81,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      title: Error Response
-      description: Standard error response.
-      properties:
-        cod:
-          type: integer
-          description: Error code.
-          example: 401
-        message:
-          type: string
-          description: Error message.
-          example: Invalid API key.
     UvIndexData:
       type: object
       title: UV Index Data
@@ -123,6 +110,19 @@ components:
           format: double
           description: UV index value (scale 0-11+).
           example: 5.2
+    ErrorResponse:
+      type: object
+      title: Error Response
+      description: Standard error response.
+      properties:
+        cod:
+          type: integer
+          description: Error code.
+          example: 401
+        message:
+          type: string
+          description: Error message.
+          example: Invalid API key.
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
